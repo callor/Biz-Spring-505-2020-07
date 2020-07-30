@@ -6,7 +6,11 @@
  <mapper namespace="com.biz.order.dao.OrderDao">
  
  	<select id="selectAll"></select>
- 	<select id="findById"></select>
+ 	
+ 	<select id="findBySeq" resultType="OrderVO">
+ 		SELECT * FROM tbl_order WHERE o_seq = #{seq}
+ 	</select>
+ 	
  	<insert id="insert"></insert>
  	<update id="update"></update>
  	<delete id="delete"></delete>
