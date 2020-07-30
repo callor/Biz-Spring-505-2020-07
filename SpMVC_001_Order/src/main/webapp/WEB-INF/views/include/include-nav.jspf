@@ -1,0 +1,12 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<nav>
+	<ul>
+		<li><a href="#">HOME</a></li>
+		<li><a href="#p1">주문서</a></li>
+		<li><a href="#p2">공지사항</a></li>
+		<li><a href="#p3">바로가기</a></li>
+		<li><a href="#">로그인</a></li>
+		<li><a href="#">회원가입</a></li>	
+	</ul>
+</nav>

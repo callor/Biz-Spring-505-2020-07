@@ -1,0 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<header>
+	<h3>나의 웹 어플리케이션</h3>
+	<p>나의 웹 어플리케이션을 방문해 주셔서 고맙습니다</p>
+</header>
