@@ -1,0 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<footer>
+	<address>CopyRight &copy; callor@callor.com</address>
+	<address>Korea &amp; 대한민국 &sum; &hearts; &#128512;</address>
+</footer>
