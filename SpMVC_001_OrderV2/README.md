@@ -46,5 +46,39 @@
 NullpointerException : @Autowired가 빠졌을때
 No qualifying .. : @Service, Annotation이 빠진경우, Dao를 만들지 못하는 경우
 
+### 사용자가 서버에 데이터를 보내기
+1. 고정값을 보내는 방법 : a href="주소?변수=값" 형식으로 링크를 만드는 방법  
+이방법은 값을 변경하려면 소스코드를 변경해야 하는 문제가 있다.
+2. 사용자가 키보드로 입력한 값을 보내는 방법
+* input tag를 사용하여 입력box를 보여주고
+* 값을 입력하면 서버로 한꺼번에 전송하는 방법
+* input tag 들은 form tag로 감싸서 전송을 하게 된다.
+
+	<form>
+		<input>
+		<input>
+		<button>보내기</button>
+	</form>
+
+* 이러한 방법을 사용하면 query 문자열을 ?변수1=값&변수2=값 과같이 만들지 않아도 자동으로 query 문자열을 생성하여 서버로 전송을 해준다
+* form tag는 서버의 req 주소를 지정해서 보내야 야 한다. : action을 작성
+* form tag에 method라는 속성을 지정할수 있는데 기본값이 GET 이다.
+
+#### form tag의 method
+* GET, POST를 주로 사용하고, 최신기술에 PUT, DELETE, HEAD 등이 있다
+* GET method 방식 : input box에 입력된 데이터를 query 문자열로 변환하여 서버로 전송   
+보내는 데이터가 주소창에 노출이되고, 누군가 조작하기가 쉽다.  
+GET method 방식은 query문자열의 최대 길이가 255자이며 그보다 큰 문자열은 잘리게 된다
+
+* POST method 방식 : HTTP 프로토콜의 BODY 영역에 데이터를 심어서 서버로 전송을 한다  
+문자열방식으로 전송되지 않기때문에 GET방식에 비해 보안이 좋으며 데이터 길이에 제한이 없다  
+일반적으로 form, input을 사용한 입력값 전송에는 POST method방식을 사용한다.
+
+
+
+
+
+
+
 
 

@@ -35,6 +35,11 @@
 			border-bottom:2px solid yellow;
 		}
 		
+		td a {
+			color : black;
+			cursor: pointer;
+		}
+		
 	</style>
 	
 </head>
@@ -62,7 +67,13 @@
         	<c:forEach items="${ORDERS}"  var="vo" varStatus="index">
         	<tr>
 	            <td>${index.count}</td>
-	            <td>${vo.o_num}</td>
+	            <td>
+
+	            <a href="order?seq=${vo.o_seq}">
+	            ${vo.o_num}
+	            </a>
+
+	            </td>
 	            <td>${vo.o_date}</td>
 	            <td>${vo.o_cnum}</td>
 	            <td>${vo.o_pcode}</td>

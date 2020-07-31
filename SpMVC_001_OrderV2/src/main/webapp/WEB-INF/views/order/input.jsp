@@ -18,6 +18,15 @@
 	
 	<section>
 	<h3>주문서입력화면</h3>
+		<form method="POST">
+	        <input name="o_num" placeholder="주문번호를 입력하세요"><br/>
+	        <input name="o_date" placeholder="날짜를 입력하세요"><br/>
+	        <input name="o_cnum" placeholder="고객번호를 입력하세요"><br/>
+	        <input name="o_pcode" placeholder="상품번호를 입력하세요"><br/>
+	        <input name="o_price" placeholder="가격을 입력하세요"><br/>
+	        <input name="o_qty" placeholder="수량을 입력하세요"><br/>
+	        <button>보내기</button>
+	    </form>
 	</section>
 	
 	<%@ include file="/WEB-INF/views/include/include-footer.jspf" %>

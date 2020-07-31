@@ -13,8 +13,30 @@
  		SELECT * FROM tbl_order WHERE o_seq = #{seq}
  	</select>
  	
- 	<insert id="insert"></insert>
+ 	<insert id="insert" parameterType="OrderVO">
+ 		INSERT INTO tbl_order (
+		 		O_SEQ,
+				O_NUM,
+				O_DATE,
+				O_CNUM,
+				O_PCODE,
+				O_PRICE,
+				O_QTY,
+				O_TOTAL
+ 		) VALUES (
+		 		SEQ_ORDER.NEXTVAL,
+				#{o_num},
+				#{o_date},
+				#{o_cnum},
+				#{o_pcode},
+				#{o_price},
+				#{o_qty},
+				#{o_total}
+ 		)
+ 	</insert>
  	<update id="update"></update>
- 	<delete id="delete"></delete>
+ 	<delete id="delete">
+ 		DELETE FROM tbl_order WHERE o_seq = #{seq}
+ 	</delete>
  
  </mapper> 

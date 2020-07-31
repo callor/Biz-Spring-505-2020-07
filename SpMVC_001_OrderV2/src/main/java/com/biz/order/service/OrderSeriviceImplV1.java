@@ -61,8 +61,9 @@ public class OrderSeriviceImplV1 implements OrderService {
 
 	@Override
 	public int insert(OrderVO orderVO) {
-		// TODO Auto-generated method stub
-		return 0;
+
+		int ret = orderDao.insert(orderVO);
+		return ret;
 	}
 
 	@Override
@@ -73,8 +74,8 @@ public class OrderSeriviceImplV1 implements OrderService {
 
 	@Override
 	public int delete(long seq) {
-		// TODO Auto-generated method stub
-		return 0;
+		int ret = orderDao.delete(seq);
+		return ret;
 	}
 
 }
