@@ -2,20 +2,26 @@ package com.biz.blog;
 
 import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * Handles requests for the application home page.
- */
+import com.biz.blog.service.BlogService;
+
 @Controller
 public class HomeController {
 	
+	@Autowired
+	BlogService bService;
+	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+		
+		bService.selectAll();
 		return "home";
+	
 	}
 	
 	// a href="constext/input"으로 request를 했을때

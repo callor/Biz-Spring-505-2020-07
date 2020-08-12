@@ -1,16 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+
 <!DOCTYPE html>
 <html>
 <head>
-	<%@ include file="/WEB-INF/views/include/include-head.jspf" %>
+<%@ include file="/WEB-INF/views/include/include-head.jspf"%>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/include/include-header.jspf" %>
+	<%@ include file="/WEB-INF/views/include/include-header.jspf"%>
 
 	<section id="main">
 		<article id="button">
-			<button><a href="input">블로그작성</a></button>
+			<button>
+				<a href="${rootPath}/blog/input">블로그작성</a>
+			</button>
 		</article>
 		<article id="blog_body">
 			<section class="blog_title">
@@ -26,11 +31,11 @@
 				<h5>그리고 나에게 주어진 길을</h5>
 				<h5>걸어야 겠다</h5>
 				<h5>오늘 밤에도 별이 바람에 스치운다.</h5>
-				
+
 			</section>
 		</article>
 	</section>
-	<%@ include file="/WEB-INF/views/include/include-footer.jspf" %>
+	<%@ include file="/WEB-INF/views/include/include-footer.jspf"%>
 
 </body>
 </html>
