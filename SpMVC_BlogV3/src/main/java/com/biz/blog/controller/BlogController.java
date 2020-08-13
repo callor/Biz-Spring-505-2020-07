@@ -22,17 +22,28 @@ public class BlogController {
 	
 	@RequestMapping(value="/list",method=RequestMethod.GET)
 	public String list(Model model) {
+		
+		List<BlogVO> blogList = bService.selectAll();
+		System.out.println(blogList.get(0).getTitle());
+		model.addAttribute("BLOGS",blogList);
+		return "list";
+	
+	}
+	
+	@RequestMapping(value="/getblog",method=RequestMethod.GET)
+	public String getBlog(Model model) {
 		System.out.println("여기는 블로그 리스트 보기!!!");
 		
 		List<BlogVO> blogList = bService.selectAll();
-		int size = blogList.size();
-		
-		model.addAttribute("TITLE",blogList.get(size - 1).getTitle());
-		model.addAttribute("CONTENT",blogList.get(size - 1).getContent());
-		model.addAttribute("USER",blogList.get(size - 1).getUser());
-		
-		return "list";
-	
+		if(blogList != null) {
+			int size = blogList.size();
+			model.addAttribute("TITLE",blogList.get(size - 1).getTitle());
+			model.addAttribute("CONTENT",blogList.get(size - 1).getContent());
+			model.addAttribute("USER",blogList.get(size - 1).getUser());
+		} else {
+			model.addAttribute("TITLE","데이터가 없음");
+		}
+		return "view";
 	}
 	@RequestMapping(value="/input",method=RequestMethod.GET)
 	public String input() {

@@ -43,11 +43,18 @@ header {
 }
 
 #main {
-    height: 100%;
+	
+	min-height:80%;
+	
     background-image: url("../images/tree-832079.jpg");
     background-repeat: no-repeat;
     background-size: 100%;
     background-attachment: fixed;
+    
+    display: flex;
+    flex-flow:column;
+    justify-content: center;
+    align-items: center;
    
 }
 
@@ -109,6 +116,10 @@ marign, padding의 값 지정
     == blog_body를 좌우 중앙에 정렬하는 용도로 많이 쓰인다
      */
     margin:10px auto;
+    
+    background-color: rgba(0,0,255,0.2);
+    color:white;
+    
 }
 
 .blog_title {

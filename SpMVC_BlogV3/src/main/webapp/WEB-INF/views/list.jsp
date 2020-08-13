@@ -24,12 +24,14 @@
 			</button>
 		</article>
 		<article id="blog_body">
-			<section class="blog_title">
-				<h3>${TITLE} - <span>${USER}</span></h3>
-			</section>
-			<section class="blog_text">
-				<h5>${CONTENT}</h5>
-			</section>
+			<c:forEach items="${BLOGS}" var="BLOG">
+				<section class="blog_title">
+					<h3>${BLOG.title} - <span>${BLOG.user}</span></h3>
+				</section>
+				<section class="blog_text">
+					<h5>${BLOG.content}</h5>
+				</section>
+			</c:forEach>
 		</article>
 	</section>
 	<%@ include file="/WEB-INF/views/include/include-footer.jspf"%>

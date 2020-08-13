@@ -13,15 +13,9 @@ import com.biz.blog.service.BlogService;
 @Controller
 public class HomeController {
 	
-	@Autowired
-	BlogService bService;
-	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		
-		bService.selectAll();
 		return "home";
-	
 	}
 	
 	// a href="constext/input"으로 request를 했을때

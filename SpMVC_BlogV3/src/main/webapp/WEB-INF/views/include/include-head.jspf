@@ -17,6 +17,6 @@ uri 를 통해서 해당하는 기능을 import 하여 *.jsp 파일내에서
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <title>얼렁뚱땅 블로그</title>
 <link rel="stylesheet" type="text/css" 
-	href="${rootPath}/static/css/main.css?ver=2020-08-13"/>
+	href="${rootPath}/static/css/main.css?ver=2020-08-13-003"/>
         
     

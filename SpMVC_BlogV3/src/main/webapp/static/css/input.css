@@ -2,6 +2,11 @@
 
  #main {
  	background-image: url("../images/road-4143370.jpg");
+ 	
+ 	display: flex;
+ 	justify-content: center;
+ 	align-items: center;
+ 
  }
 
 
@@ -11,12 +16,16 @@
 	border: 1px solid green;
 	padding: 10px 0;
 	border-radius: 10px;
+	
+	background-color: rgba(0,255,0,0.5);
+	
 }
 
 /* #main 안쪽의 form 안쪽의 div들 */
 #main form div {
 	width: 80%;
 	margin: 0 auto;
+	padding:10px;
 }
 
 #main form div input {
