@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+ #main {
+ 	background-image: url("../images/road-4143370.jpg");
+ }
+
+
+#main form {
+	width: 80%;
+	margin: 0 auto;
+	border: 1px solid green;
+	padding: 10px 0;
+	border-radius: 10px;
+}
+
+/* #main 안쪽의 form 안쪽의 div들 */
+#main form div {
+	width: 80%;
+	margin: 0 auto;
+}
+
+#main form div input {
+	width: 100%;
+	padding:5px;
+	border-radius: 5px;
+	border:1px solid gray;
+}
+
+/*
+	#main에 포함된 form
+	그안에 포함된 div 들 중
+	가장 마지막에 위치한 tag
+	*/
+#main form div:last-child {
+	text-align: right;
+}
+
+#main form div button {
+	padding: 8px 16px;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	outline: 0;
+	border-bottom: 2px solid transparent;
+	transition: all 0.5s ease-in;
+}
+
+#main form div button:first-child {
+	background-color: green;
+}
+
+#main form div button:last-child {
+	background-color: blue;
+}
+
+#main form div button:hover {
+	color: black;
+	background-color: honeydew;
+	border-bottom: 2px solid green;
+}
