@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.biz.blog.service.BlogService;
+import com.biz.blog.service.BlogFileService;
 
 @Controller
 public class HomeController {

@@ -18,7 +18,7 @@ import org.springframework.stereotype.Service;
 import com.biz.blog.model.BlogVO;
 
 @Service
-public class BlogService {
+public class BlogFileService {
 
 	/*
 	 * SerlvetContext
@@ -34,7 +34,7 @@ public class BlogService {
 	private String serverRootPath ;
 	private String blogFile ; 
 	
-	public BlogService() {
+	public BlogFileService() {
 		this.blogFile = "blog.txt";
 		// this.serverRootPath = context.getRealPath("/");
 	}
@@ -59,9 +59,9 @@ public class BlogService {
 			for(String str : strList) {
 				String[] sSplit = str.split(":");
 				BlogVO blogVO = new BlogVO();
-				blogVO.setTitle(sSplit[0]);
-				blogVO.setContent(sSplit[1]);
-				blogVO.setUser(sSplit[2]);
+				blogVO.setBl_title(sSplit[0]);
+				blogVO.setBl_contents(sSplit[1]);
+				blogVO.setBl_user(sSplit[2]);
 				blogList.add(blogVO);
 			}
 			return blogList;
@@ -94,9 +94,9 @@ public class BlogService {
 			print = new PrintWriter(fileWriter);
 			
 			String strBlog = String.format("%s:%s:%s", 
-					blogVO.getTitle(),
-					blogVO.getContent(),
-					blogVO.getUser());
+					blogVO.getBl_title(),
+					blogVO.getBl_contents(),
+					blogVO.getBl_user());
 			print.println(strBlog);
 			print.flush();
 			print.close();

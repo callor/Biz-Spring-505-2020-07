@@ -5,7 +5,15 @@
   
  <mapper namespace="com.biz.blog.dao.BlogDao">
  
- 	<select id="selectAll"></select>
+ 	<!-- 
+ 	select 명령에 resutType이 빠진경우
+ 	A query was run and no Result Maps were found for the Mapped Statement 
+ 	'com.biz.blog.dao.BlogDao.selectAll'
+ 	-->
+  	<select id="selectAll" resultType="BlogVO">
+ 		SELECT * FROM tbl_blogs
+ 		ORDER BY bl_date DESC, bl_time DESC
+ 	</select>
  	<select id="findById"></select>
  	<insert id="insert"></insert>
  	<update id="update"></update>

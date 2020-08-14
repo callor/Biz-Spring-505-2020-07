@@ -1,10 +1,10 @@
-package com.biz.blog.dao;
+package com.biz.blog.service;
 
 import java.util.List;
 
 import com.biz.blog.model.BlogVO;
 
-public interface BlogDao {
+public interface BlogService {
 
 	public List<BlogVO> selectAll();
 	

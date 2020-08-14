@@ -17,7 +17,7 @@
 	<bean id="oracleDs" 
 		class="org.apache.commons.dbcp2.BasicDataSource"  >
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<property name="url" value="jdbc:oralce:thin:@localhost:1521:xe"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 		<property name="username" value="user1"/>
 		<property name="password" value="user1"/>
 	</bean>

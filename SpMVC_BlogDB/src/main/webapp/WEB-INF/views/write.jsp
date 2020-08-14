@@ -16,13 +16,14 @@
 	<section id="main">
 		<form action="${rootPath}/blog/writer" method="POST">
 			<div>
-				<input name="title" placeholder="제목을 입력하세요" />
+				<input name="bl_user" placeholder="사용자를 입력하세요" />
+			</div>
+		
+			<div>
+				<input name="bl_title" placeholder="제목을 입력하세요" />
 			</div>
 			<div>
-				<input name="content" placeholder="내용을 입력하세요" />
-			</div>
-			<div>
-				<input name="user" placeholder="사용자를 입력하세요" />
+				<input name="bl_contents" placeholder="내용을 입력하세요" />
 			</div>
 			<div>
 				<button type="button">처음으로</button>
