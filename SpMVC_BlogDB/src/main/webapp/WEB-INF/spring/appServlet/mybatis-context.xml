@@ -33,7 +33,7 @@
 
 	<!-- SqlSession(SqlSessionTemplates) : SQL을 전송하는 담당 -->
 	<bean class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg ref="sqlFactory" index="0"/>	
+		<constructor-arg name="sqlSessionFactory" ref="sqlFactory"/>	
 	</bean>
 
 </beans>
