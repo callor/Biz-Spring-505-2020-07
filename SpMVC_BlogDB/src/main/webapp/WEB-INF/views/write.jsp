@@ -14,23 +14,32 @@
 <body>
 	<%@ include file="/WEB-INF/views/include/include-header.jspf" %>
 	<section id="main">
-		<form action="${rootPath}/blog/writer" method="POST">
+		<form method="POST">
+			<input name="bl_seq" value="${BLOG.bl_seq}" type="hidden"/>
+			<input name="bl_date" value="${BLOG.bl_date}" type="hidden"/>
+			<input name="bl_time" value="${BLOG.bl_time}" type="hidden"/>
 			<div>
-				<input name="bl_user" placeholder="사용자를 입력하세요" />
-			</div>
-		
-			<div>
-				<input name="bl_title" placeholder="제목을 입력하세요" />
-			</div>
-			<div>
-				<input name="bl_contents" placeholder="내용을 입력하세요" />
+				<input name="bl_user" value="${BLOG.bl_user}"  placeholder="사용자를 입력하세요" />
 			</div>
 			<div>
-				<button type="button">처음으로</button>
+				<input name="bl_title" value="${BLOG.bl_title}" placeholder="제목을 입력하세요" />
+			</div>
+			<div>
+				<input name="bl_contents" value="${BLOG.bl_contents}" placeholder="내용을 입력하세요" />
+			</div>
+			<div>
+				<button type="button" onclick="goHome()">처음으로</button>
 				<button type="submit">저장</button>
 			</div>
 		</form>
 	</section>
 	<%@ include file="/WEB-INF/views/include/include-footer.jspf" %>
+	<script>
+		function goHome() {
+			document.location.href ="${rootPath}/"
+		}
+	
+	</script>
+	
 </body>
 </html>

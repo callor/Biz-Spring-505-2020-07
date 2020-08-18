@@ -13,6 +13,7 @@ public interface BlogService {
 	// 반드시 1개만 나온다.
 	// return type이 절대 List 형이 아니다.
 	public BlogVO findBySeq(long seq);
+			
 	
 	// 제목으로 검색하기
 	// PK칼럼이 아닌 나머지 칼럼을 대상으로 조회를 하면

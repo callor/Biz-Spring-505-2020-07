@@ -15,8 +15,56 @@
  		ORDER BY bl_date DESC, bl_time DESC
  	</select>
  	<select id="findById"></select>
- 	<insert id="insert"></insert>
- 	<update id="update"></update>
- 	<delete id="delete"></delete>
+ 	
+ 	<!-- resultType : 어떤 type으로 데이터를 return 할 것인가 -->
+ 	<select id="findBySeq" resultType="BlogVO">
+ 		SELECT * FROM tbl_blogs
+ 		WHERE bl_seq = #{seq}
+ 	</select>
+ 	
+ 	<!--  parameterType : 어떤 type으로 데이터를 주입할 것인가 -->
+ 	<insert id="insert" parameterType="BlogVO">
+ 		INSERT INTO tbl_blogs(
+	 		BL_SEQ,
+			BL_USER,
+			BL_DATE,
+			BL_TIME,
+			BL_TITLE,
+			BL_CONTENTS
+ 		) VALUES (
+	 		SEQ_BLOG.NEXTVAL,
+			#{bl_user},
+			#{bl_date},
+			#{bl_time},
+			#{bl_title},
+			#{bl_contents}
+ 		)
+ 	
+ 	
+ 	</insert>
+ 	
+ 	<update id="update" parameterType="BlogVO">
+ 		UPDATE tbl_blogs SET
+			bl_user		= #{bl_user},
+			bl_date		= #{bl_date},
+			bl_time		= #{bl_time},
+			bl_title 	= #{bl_title},
+			bl_contents	= #{bl_contents}
+		WHERE bl_seq = #{bl_seq}
+ 	</update>
+ 	
+ 	<delete id="delete">
+ 		DELETE FROM tbl_blogs 
+ 		WHERE bl_seq = #{seq}
+ 	</delete>
  
  </mapper> 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
