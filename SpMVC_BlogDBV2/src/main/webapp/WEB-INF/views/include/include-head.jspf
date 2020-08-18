@@ -1,0 +1,22 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+/*
+taglib
+*.jsp에서 java code 를 사용하지 않고 HTML 친화적인 방법으로
+확장된 기능을 사용하기 위해서 도입된 추가 기능
+원래는 *.jsp에 없던 기능이지만
+uri 를 통해서 해당하는 기능을 import 하여 *.jsp 파일내에서
+마치 HTML의 tag처럼 사용할수 있게 만들어주는 확장 기능
+*/
+%>    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />    
+
+<meta charset="UTF-8">
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>얼렁뚱땅 블로그</title>
+<link rel="stylesheet" type="text/css" 
+	href="${rootPath}/static/css/main.css?ver=2020-08-13-003"/>
+<script src="https://code.jquery.com/jquery-latest.min.js"></script>        
+    

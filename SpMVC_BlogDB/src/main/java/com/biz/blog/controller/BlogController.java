@@ -61,7 +61,12 @@ public class BlogController {
 		return "view";
 	}
 	@RequestMapping(value="/input",method=RequestMethod.GET)
-	public String input() {
+	public String input(Model model) {
+		
+		// write.jsp에서 input POST로 데이터를 전달할때
+		// 비어있는("")데이터 때문에 발생하는 400 오류를 방지하기 위해
+		// 공백의 새로운 BlogVO만들어서 write.jsp로 보내준다.
+		model.addAttribute("BLOG", new BlogVO());
 		return "write";
 	}
 	

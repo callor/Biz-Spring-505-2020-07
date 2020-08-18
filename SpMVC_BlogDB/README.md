@@ -32,7 +32,10 @@ true이다. 이러한 query를 보내서 만약 DELETE명령을 수행한다면
 * input GET로 write.jsp를 열고 저장을 하면 input POST로 Controller에 데이터가 전송되고
 * update GET로 write.jsp를 열고 저장을 하면 update POST로 Controller에 데이터가 전송된다.
 
-
+### HTTP 상태코드 400
+* Controller에서 VO를 매개변수로 설정하여 form에서 전달된 데이터를 받을때 많이 발생하는 문제(오류코드)
+* BlogVO의 bl_seq는 type이 long형인데 블로그 새로작성을 위해 열린 write.jsp에 input type=hidden으로 bl_seq 항목이 있다.  
+이 항목에 아무런 값이 채워지지 않은 상태로 Controller로 전달되면 ""형의 값을 long형으로 타입변환을 시도하가다 내부적으로 NumberFormatExceptio이 발생하여 나타나는 오류
 
 
 

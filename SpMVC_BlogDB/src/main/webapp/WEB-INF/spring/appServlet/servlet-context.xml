@@ -20,9 +20,13 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
-	<context:component-scan base-package="com.biz.blog" />
-	
-	
+
+	<!-- 
+	프로젝트가 RUN 할때 굳이 scan 하지 않아도 되는 클래스들을 
+	scan하는 비효율을 방지하기 위해
+	bean등록할 필요가 있는 클래스들이 있는 패키지만 스캔하도록 설정
+	-->	
+	<context:component-scan base-package="com.biz.blog.controller" />
+	<context:component-scan base-package="com.biz.blog.service" />
 	
 </beans:beans>

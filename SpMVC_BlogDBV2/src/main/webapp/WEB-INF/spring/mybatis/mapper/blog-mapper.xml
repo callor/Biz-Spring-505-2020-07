@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.biz.blog.dao.BlogDao">
+ 
+ 	<!-- 
+ 	select 명령에 resutType이 빠진경우
+ 	A query was run and no Result Maps were found for the Mapped Statement 
+ 	'com.biz.blog.dao.BlogDao.selectAll'
+ 	-->
+  	<select id="selectAll" resultType="BlogVO">
+ 		SELECT * FROM tbl_blogs
+ 		ORDER BY bl_date DESC, bl_time DESC
+ 	</select>
+ 	<select id="findById"></select>
+ 	
+ 	<!-- resultType : 어떤 type으로 데이터를 return 할 것인가 -->
+ 	<select id="findBySeq" resultType="BlogVO">
+ 		SELECT * FROM tbl_blogs
+ 		WHERE bl_seq = #{seq}
+ 	</select>
+ 	
+ 	<!--  parameterType : 어떤 type으로 데이터를 주입할 것인가 -->
+ 	<insert id="insert" parameterType="BlogVO">
+ 		INSERT INTO tbl_blogs(
+	 		BL_SEQ,
+			BL_USER,
+			BL_DATE,
+			BL_TIME,
+			BL_TITLE,
+			BL_CONTENTS
+ 		) VALUES (
+	 		SEQ_BLOG.NEXTVAL,
+			#{bl_user},
+			#{bl_date},
+			#{bl_time},
+			#{bl_title},
+			#{bl_contents}
+ 		)
+ 	
+ 	
+ 	</insert>
+ 	
+ 	<update id="update" parameterType="BlogVO">
+ 		UPDATE tbl_blogs SET
+			bl_user		= #{bl_user},
+			bl_date		= #{bl_date},
+			bl_time		= #{bl_time},
+			bl_title 	= #{bl_title},
+			bl_contents	= #{bl_contents}
+		WHERE bl_seq = #{bl_seq}
+ 	</update>
+ 	
+ 	<delete id="delete">
+ 		DELETE FROM tbl_blogs 
+ 		WHERE bl_seq = #{seq}
+ 	</delete>
+ 
+ </mapper> 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
