@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+form fieldset {
+	width: 80%;
+	margin: 10px auto;
+	border: 1px solid blue;
+	border-radius: 5px;
+}
+
+form fieldset legend {
+	color: blue;
+	font-weight: bold;
+}
+
+label {
+	display: inline-block;
+	width: 20%;
+	text-align: right;
+	margin: 4px;
+	padding: 8px;
+	color: rgb(100, 78, 228);
+	font-weight: bold;
+}
+
+input {
+	display: inline-block;
+	width: 60%;
+	margin: 4px;
+	padding: 8px;
+	border-radius: 5px;
+	border: 1px solid gray;
+}
+
+#btn_box {
+	text-align: right;
+	width: 80%;
+}
+
+#btn_box button {
+	padding: 8px 16px;
+	border: none;
+	border-radius: 5px;
+	color: white;
+	cursor: pointer;
+}
+
+#btn_box button:first-child {
+	background-color: green;
+}
+
+#btn_box button:last-child {
+	background-color: blue;
+}
+
+#btn_box button:hover {
+	background-color: gray;
+	color: white;
+}
