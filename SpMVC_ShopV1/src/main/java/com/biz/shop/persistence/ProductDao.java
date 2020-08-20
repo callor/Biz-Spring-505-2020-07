@@ -1,10 +1,11 @@
 package com.biz.shop.persistence;
 
-public interface ProductDao {
+import java.util.List;
 
-	public void selectAll();
-	public void insert();
-	public void update();
-	public void delete();
+import com.biz.shop.model.ProductVO;
+
+public interface ProductDao extends GenericDao<ProductVO, String>{
 	
+	public List<ProductVO> findByTitle(String title);
+
 }

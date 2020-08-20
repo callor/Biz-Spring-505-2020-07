@@ -17,17 +17,17 @@
 			<label>상품규격</label><input name="p_std" id="p_std" />
 		</div>
 		<div>
-			<label>매입가격</label><input name="p_iprice" id="p_iprice" />
+			<label>매입가격</label><input type="number" name="p_iprice" id="p_iprice" />
 		</div>
 		<div>
-			<label>판매가격</label><input name="p_oprice" id="p_oprice" />
+			<label>판매가격</label><input type="number" name="p_oprice" id="p_oprice" />
 		</div>
 		<div>
-			<label>대표이미지</label><input type="file" name="p_image" id="p_image" />
+			<label>대표이미지</label><input type="file" id="p_image" />
 		</div>
 		<div id="btn_box">
 			<button type="button">리스트</button>
-			<button type="button">저장</button>
+			<button type="submit">저장</button>
 		</div>
 	</fieldset>
 </form>

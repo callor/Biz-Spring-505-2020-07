@@ -78,7 +78,7 @@ div.toggle {
 		$("nav ul li").click(function(){
 			var text = $(this).text();
 			if(text == "상품관리") {
-				document.location.href = "${rootPath}/product/insert"
+				document.location.href = "${rootPath}/product/"
 			} else if(text == "거래처관리") {
 				document.location.href ="${rootPath}/dept/list"
 			} else if(text == "Home") {
