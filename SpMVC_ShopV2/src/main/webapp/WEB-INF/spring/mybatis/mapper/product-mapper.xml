@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.biz.shop.persistence.ProductDao">
+ 
+ 	<select id="selectAll" resultType="ProVO">
+ 		SELECT * FROM tbl_product
+ 	</select>
+ 	 	
+ 	<select id="findById"></select>
+ 	
+ 	<insert id="insert">
+ 		INSERT INTO tbl_product(
+	 		P_CODE,
+			P_NAME,
+			P_DCODE,
+			P_STD,
+			P_IPRICE,
+			P_OPRICE,
+			P_IMAGE
+ 		) VALUES (
+	 		#{p_code},
+			#{p_name},
+			#{p_dcode},
+			#{p_std},
+			#{p_iprice},
+			#{p_oprice},
+			#{p_image}
+ 		)
+ 	</insert>
+ 	
+ 	<update id="update"></update>
+ 	<delete id="delete"></delete>
+ 
+ </mapper> 
