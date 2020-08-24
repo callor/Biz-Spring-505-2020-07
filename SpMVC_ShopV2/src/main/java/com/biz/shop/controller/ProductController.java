@@ -55,12 +55,22 @@ public class ProductController {
 	public String insert(@ModelAttribute ProductVO proVO) {
 
 		log.debug("상품정보 입력 : {}" , proVO.toString());
-		
 		int ret = proService.insert(proVO);
-		
-		return "redirect:/";
+		return "redirect:/product/";
 	
 	}
+	
+	
+	@RequestMapping(value="/detail",method=RequestMethod.GET)
+	public String detail(String p_code, Model model) {
+		
+		ProductVO proVO = proService.findByID(p_code);
+		
+		model.addAttribute("PRO_VO",proVO);
+		model.addAttribute("BODY","PRO_DETAIL");
+		return "home";
+	}
+
 	
 }
 

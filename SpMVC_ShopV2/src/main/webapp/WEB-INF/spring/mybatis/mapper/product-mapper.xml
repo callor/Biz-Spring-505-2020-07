@@ -5,12 +5,7 @@
   
  <mapper namespace="com.biz.shop.persistence.ProductDao">
  
- 	<select id="selectAll" resultType="ProVO">
- 		SELECT * FROM tbl_product
- 	</select>
- 	 	
- 	<select id="findById"></select>
- 	
+
  	<insert id="insert">
  		INSERT INTO tbl_product(
 	 		P_CODE,

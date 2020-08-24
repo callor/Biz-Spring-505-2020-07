@@ -1,0 +1,46 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<style>
+section {
+	width:90%;
+	margin: 10px auto;
+	display: flex;
+	justify-content: center;
+}
+
+article {
+	width: 40%;
+	margin: 10px;
+}
+
+#pro_info h3, #pro_info p {
+	display: inline-block;
+	padding: 8px;
+	margin: 8px 4px; /* t, b: 8px, le,ri:4px;*/
+	border-bottom: 2px solid #ccc;
+}
+
+#pro_info h3 {
+	background-color: #dddddd;
+	color: blue;
+	font-weight: bold;
+	text-align: right;
+}
+
+#pro_info p {
+	width: 60%;
+}
+</style>
+
+<section id="view_main">
+	<article id="pro_image">
+		<img src="${rootPath}/static/images/tree-832079.jpg" width="100%" alt="상품메인이미지" />
+	</article>
+	<article id="pro_info">
+		<h3>상품코드</h3><p>${PRO_VO.p_code }</p><br />
+		<h3>상품이름</h3><p>${PRO_VO.p_name }</p><br />
+		<h3>매입단가</h3><p>${PRO_VO.p_iprice }</p><br />
+		<h3>판매단가</h3><p>${PRO_VO.p_oprice }</p><br />
+	</article>
+</section>

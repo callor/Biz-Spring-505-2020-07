@@ -64,6 +64,26 @@
 	}
 	
 </style>        
+<script>
+	$(function(){
+		
+		$(".pro_item").click(function(){
+			// tr 들 중에 한 항목을 클릭하면
+			// 그 항목에 대한 정보가 this 담겨 있게 된다.
+			// this에 담긴 정보중에 자손 tag( td )을 찾고
+			// 자손 tag들 중에 0번째에 있는 자손의 text값을 가져와서
+			// p_code 변수에 담아라
+			const p_code = $(this).children().eq(0).text()
+			// alert(p_code)
+			
+			const p_code1 = $(this).data("pcode")
+			// alert(p_code1)
+
+			document.location.href="${rootPath}/product/detail?p_code=" + p_code
+		
+		})
+	})
+</script>
 <table>
 	<thead>
 		<tr>

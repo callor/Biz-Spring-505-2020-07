@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />        
-<tr>
+<tr class="pro_item" data-pcode="${VO.p_code}">
 	<td>${VO.p_code}</td>
 	<td>${VO.p_name}</td>
 	<td>${VO.p_dcode}</td>

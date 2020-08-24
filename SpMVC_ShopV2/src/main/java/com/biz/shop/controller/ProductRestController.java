@@ -2,9 +2,13 @@ package com.biz.shop.controller;
 
 import java.util.Scanner;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.biz.shop.service.ProductService;
 
 /*
  * 
@@ -29,17 +33,27 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value="/api/product")
 public class ProductRestController {
+
+	@Autowired
+	@Qualifier("proServiceV1")
+	ProductService proService;
 	
-	private Scanner scan;
-	public ProductRestController() {
-		scan = new Scanner(System.in); 
-	}
+	@RequestMapping(value="/get_pcode",method=RequestMethod.GET)
+	public String getPCode( ) {
+		
+		/*
+		 * 요구사항
+		 * ProductService의 getPCode() 호출하여
+		 * 새로운 상품코드를 생성하여 받고 싶다.
+		 * 
+		 * TDD(Test Driven Developer)
+		 * 요구사항을 먼저만들고
+		 * 실제 구현되는 코드를 나중에 만드는 방식
+		 * 
+		 */
+		String strPCode = proService.getPCode() ;
+		return strPCode;
 	
-	@RequestMapping(value="/keyinput",method=RequestMethod.GET)
-	public String keyinput( ) {
-		System.out.print("키를 입력하세요~~~~");
-		String strIn = scan.nextLine();
-		return strIn;
 	}
 }
 
