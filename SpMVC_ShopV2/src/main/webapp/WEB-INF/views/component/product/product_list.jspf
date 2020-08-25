@@ -79,7 +79,13 @@
 			const p_code1 = $(this).data("pcode")
 			// alert(p_code1)
 
-			document.location.href="${rootPath}/product/detail?p_code=" + p_code
+			// 문자열 탬플릿트
+			// ES6(ESCMA 2015))에서는 백틱을 사용하여 변수명과
+			// 문자열을 합성할수 있다
+			// =`${rootPath}/product/detail?id=${p_code}` // ?id=P00001
+			// 하지만 JSP에서는 EL tag 와 문법충돌로 인하여 사용이 불가능하다.		
+			document.location.href
+				="${rootPath}/product/detail?id=" + p_code // ?id=P00001
 		
 		})
 	})
