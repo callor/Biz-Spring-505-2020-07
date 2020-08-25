@@ -24,8 +24,8 @@
 				},
 			});
 		}
-		$("#p_code_gen").click( getPCode );
-		$("#btn_save").click(function(){
+		$("#p_code_gen").click(getPCode);
+		$("#btn_save").click(function() {
 			/*
 			js 변수선언 키워드
 			var, let, const
@@ -42,18 +42,17 @@
 				
 				순서는 const 를 먼저 고려, let, var 순으로 생각하자
 				가급적 var는 자제하자
-			*/
+			 */
 			const p_code = $("#p_code").val();
 			const p_name = $("#p_name").val();
-			
-			if(p_code == "") {
-				if(confirm("상품코드는 반드시 필요합니다\n"
-						+ "상품코드를 생성할까요")) {
+
+			if (p_code == "") {
+				if (confirm("상품코드는 반드시 필요합니다\n" + "상품코드를 생성할까요")) {
 					getPCode()
 				}
 				return false
 			}
-			if(p_name == "") {
+			if (p_name == "") {
 				alert("상품이름은 반드시 입력해야 합니다")
 				$("#p_name").focus()
 				return false
@@ -66,23 +65,29 @@
 	<fieldset>
 		<legend>상품정보 등록</legend>
 		<div>
-			<label>상품코드</label><input name="p_code" id="p_code" />
+			<label>상품코드</label> <input name="p_code" id="p_code" value="${PRO_VO.p_code}" />
 			<button type="button" id="p_code_gen">코드생성</button>
 		</div>
 		<div>
-			<label>상품이름</label><input name="p_name" id="p_name" />
+			<label>상품이름</label> <input name="p_name" id="p_name" value="${PRO_VO.p_name}" />
 		</div>
 		<div>
-			<label>주매입처</label><input name="p_dcode" id="p_dcode" />
+			<label>주매입처</label> <input name="p_dcode" id="p_dcode" value="${PRO_VO.p_dcode}" />
 		</div>
 		<div>
-			<label>상품규격</label><input name="p_std" id="p_std" />
+			<label>상품규격</label> 
+			<input name="p_std" id="p_std" 
+						value="${PRO_VO.p_std}" />
 		</div>
 		<div>
-			<label>매입가격</label><input type="number" name="p_iprice" id="p_iprice" />
+			<label>매입가격</label> 
+			<input type="number" name="p_iprice" 
+					id="p_iprice" value="${PRO_VO.p_iprice}" />
 		</div>
 		<div>
-			<label>판매가격</label><input type="number" name="p_oprice" id="p_oprice" />
+			<label>판매가격</label> 
+			<input type="number" name="p_oprice" 
+					id="p_oprice" value="${PRO_VO.p_oprice}" />
 		</div>
 		<div>
 			<label>대표이미지</label><input type="file" id="p_image" />

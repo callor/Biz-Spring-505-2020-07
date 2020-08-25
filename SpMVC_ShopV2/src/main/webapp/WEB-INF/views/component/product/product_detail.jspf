@@ -32,7 +32,32 @@ article {
 	width: 60%;
 }
 </style>
+<script>
+$(function(){
 
+	$("#pro_delete").click(function(){
+		if(confirm("${PRO_VO.p_name} \n상품데이터를 삭제합니다.")) {
+			/*
+			href history :
+			web 서핑을 할때 사용자가 href 등을 클릭해서 페이지를 전환하였다가
+			이전(뒤로가기)를 누르면 이전화면으로 되될아가는 기능이 있다
+			
+			location.href 는 이전화면을 history에 저장한 후 다음 화면으로 전환을 하여
+			뒤로가기를 눌렀을때 이전화면을 복원해주는 기능이 포함되어 있다.
+			
+			location.replace() 는 이전화면을 history에 저장하지 말고
+			다음화면을 현재화면과 겹치도록 열어라 
+			뒤로가기를 눌렀을때 이전화면이 복원되지 않는다.`
+			
+			*/
+			// document.location.href = "${rootPath}/product/delete?id=${PRO_VO.p_code}"
+			document.location.replace("${rootPath}/product/delete?id=${PRO_VO.p_code}")
+		}
+	})
+})
+
+
+</script>
 <section id="view_main">
 	<article id="pro_image">
 		<img src="${rootPath}/static/images/tree-832079.jpg" width="100%" alt="상품메인이미지" />
@@ -81,7 +106,7 @@ article {
 <section id="view_menu">
 	<a href="${rootPath}/product/">리스트</a>
 	<a href="${rootPath}/product/update?id=${PRO_VO.p_code}">수정</a>
-	<a href="${rootPath}/product/delete?id=${PRO_VO.p_code}">삭제</a>
+	<a href="javascript:void(0)" id="pro_delete">삭제</a>
 </section>
 <hr/>
 

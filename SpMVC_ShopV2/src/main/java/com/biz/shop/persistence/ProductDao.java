@@ -8,10 +8,10 @@ import com.biz.shop.model.ProductVO;
 
 public interface ProductDao extends GenericDao<ProductVO, String>{
 	
-	@Select(" SELECT * FROM tbl_product ")
+	@Select(" SELECT * FROM tbl_product "
+			+ " WHERE p_not_use IS NULL ")
 	@Override
 	public List<ProductVO> selectAll() ;
-
 	public List<ProductVO> findByTitle(String title);
 
 	/*
@@ -23,9 +23,8 @@ public interface ProductDao extends GenericDao<ProductVO, String>{
 	public String maxPCode();
 	
 	@Select(" SELECT * FROM tbl_product "
-			+ " WHERE p_code = RPAD(#{id},6 ,' ')  " )
+			+ " WHERE p_not_use IS NULL AND p_code = RPAD(#{id},6 ,' ')  " )
 	@Override
 	public ProductVO findByID(String id) ;
-	
 	
 }

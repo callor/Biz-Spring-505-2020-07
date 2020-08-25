@@ -101,6 +101,29 @@ public class ProductController {
 		int ret = proService.delete(p_code);
 		return "redirect:/product/";
 	}
+	
+	/*
+	 * 1. update(GET) request를 수신, 이때 PK값을 매개변수로 수신
+	 * 2. findByID(PK)를 호출하여 VO값을 찾고
+	 * 3. Model에 VO를 심어서
+	 * 4. write.jsp로 내려보낸다.
+	 * 5. write.jsp는 Model에 담긴 VO를 input box에 보여주고
+	 * 6. 사용자에게 변경할 데이터를 입력하도록 수행
+	 * 7. 저장(submit)수행
+	 * 8. update(POST) request를 수신, 이때 데이터는 VO 매개변수로 수신
+	 * 9. service.update(VO) 수행하여 데이터 변경
+	 */
+	@RequestMapping(value="/update",method=RequestMethod.GET)
+	public String update(@RequestParam("id") String p_code,Model model) {
+		
+		ProductVO proVO = proService.findByID(p_code);
+		model.addAttribute("PRO_VO",proVO);
+		model.addAttribute("BODY","PRO_WRITE");
+		
+		return "home";
+		
+	}
+	
 
 }
 
