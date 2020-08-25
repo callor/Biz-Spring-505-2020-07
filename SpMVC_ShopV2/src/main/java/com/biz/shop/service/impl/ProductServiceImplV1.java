@@ -47,8 +47,13 @@ public class ProductServiceImplV1 implements ProductService{
 
 	@Override
 	public int update(ProductVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		// Update 를 수행하기전에 삭제Flag칼럼을 강제로 null로 설정하여
+		// 해당 상품이 삭제표시가 되지 않도록 하여놓는다.
+		vo.setP_not_use(null);
+		int ret = proDao.update(vo);
+		return ret;
+		
 	}
 
 	/*

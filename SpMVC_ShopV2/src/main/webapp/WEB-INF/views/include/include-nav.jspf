@@ -80,7 +80,7 @@ div.toggle {
 			if(text == "상품관리") {
 				document.location.href = "${rootPath}/product/"
 			} else if(text == "거래처관리") {
-				document.location.href ="${rootPath}/dept/list"
+				document.location.href ="${rootPath}/dept/"
 			} else if(text == "Home") {
 				document.location.href ="${rootPath}/"
 			}

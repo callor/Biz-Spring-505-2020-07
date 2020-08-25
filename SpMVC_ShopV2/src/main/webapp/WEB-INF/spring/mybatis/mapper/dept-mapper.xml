@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.biz.shop.persistence.DeptDao">
+ 
+ 	<select id="selectAll" resultType="DeptVO">
+ 		SELECT * FROM tbl_dept WHERE d_not_use IS NULL
+ 	</select>
+ 
+ 	<select id="findByID" resultType="DeptVO">
+ 		SELECT * FROM tbl_dept WHERE d_code = #{id}
+ 	</select>
+ 
+ 	<insert id="insert">
+ 		INSERT INTO tbl_dept (
+		 		D_CODE,
+				D_NAME,
+				D_CEO,
+				D_TEL,
+				D_ADDRESS,
+				D_MANAGER,
+				D_MN_TEL
+ 		) VALUES (
+		 		#{d_code},
+				#{d_name},
+				#{d_ceo},
+				#{d_tel},
+				#{d_address},
+				#{d_manager},
+				#{d_mn_tel}
+ 		)
+ 	</insert>
+ 	<update id="update">
+ 	</update>
+ 	<delete id="delete"></delete>
+ 
+ </mapper> 

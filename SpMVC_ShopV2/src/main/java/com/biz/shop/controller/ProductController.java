@@ -44,7 +44,9 @@ public class ProductController {
 	// write 화면을 보여주는 method
 	// <a href="http://localhost:8080/shop/product/list">상품등록</a> request 반응
 	@RequestMapping(value="/insert",method=RequestMethod.GET)
-	public String insert(Model model) {
+	public String insert(
+			@ModelAttribute("PRO_VO") ProductVO proVO,
+			Model model) {
 		// return "product/product_write";
 		model.addAttribute("BODY","PRO_WRITE");
 		return "home";
@@ -114,17 +116,24 @@ public class ProductController {
 	 * 9. service.update(VO) 수행하여 데이터 변경
 	 */
 	@RequestMapping(value="/update",method=RequestMethod.GET)
-	public String update(@RequestParam("id") String p_code,Model model) {
+	public String update(@RequestParam("id") String p_code,
+			@ModelAttribute("PRO_VO") ProductVO proVO, Model model) {
 		
-		ProductVO proVO = proService.findByID(p_code);
+		proVO = proService.findByID(p_code);
 		model.addAttribute("PRO_VO",proVO);
 		model.addAttribute("BODY","PRO_WRITE");
-		
 		return "home";
-		
 	}
 	
-
+	@RequestMapping(value="/update",method=RequestMethod.POST)
+	public String update(@ModelAttribute ProductVO proVO,Model model) {
+		
+		int ret = proService.update(proVO);
+	
+		model.addAttribute("id",proVO.getP_code());
+		return "redirect:/product/detail" ;// ?id=" + proVO.getP_code();
+	
+	}
 }
 
 

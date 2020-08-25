@@ -14,8 +14,10 @@
 	</settings>
 
 	<typeAliases>
-		<typeAlias 
-			type="com.biz.shop.model.ProductVO" 
-			alias="ProVO"/>
+		<typeAlias type="com.biz.shop.model.ProductVO" alias="ProVO"/>
+		<typeAlias type="com.biz.shop.model.DeptVO" alias="DeptVO"/>
 	</typeAliases>
 </configuration>
+
+
+

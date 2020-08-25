@@ -24,7 +24,7 @@
 		class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="oracleDS" />
 		<property name="mapperLocations"
-			value="/WEB-INF/spring/mybatis/mapper/product-mapper.xml" />
+			value="/WEB-INF/spring/mybatis/mapper/*-mapper.xml" />
 		<property name="configLocation"
 			value="/WEB-INF/spring/mybatis/mybatis-config.xml" />
 	</bean>

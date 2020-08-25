@@ -44,7 +44,7 @@ header h2 {
 	<section>
 		<c:choose>
 			<c:when test="${BODY == 'PRO_WRITE' }">
-				<%@ include file="/WEB-INF/views/component/product/product_write.jspf"%>
+				<%@ include file="/WEB-INF/views/component/product/product_writeV2.jspf"%>
 			</c:when>
 			<c:when test="${BODY == 'PRO_HOME'}">
 				<%@ include file="/WEB-INF/views/component/product/product_list.jspf"%>
@@ -53,7 +53,13 @@ header h2 {
 				<%@ include file="/WEB-INF/views/component/product/product_detail.jspf"%>
 			</c:when>
 			<c:when test="${BODY == 'DEPT_LIST' }">
-				<h3>거래처 리스트</h3>
+				<%@ include file="/WEB-INF/views/component/dept/dept_list.jspf" %>
+			</c:when>
+			<c:when test="${BODY == 'DEPT_WRITE' }">
+				<%@ include file="/WEB-INF/views/component/dept/dept_write.jspf" %>
+			</c:when>
+			<c:when test="${BODY == 'DEPT_DETAIL' }">
+				<%@ include file="/WEB-INF/views/component/dept/dept_detail.jspf" %>
 			</c:when>
 			<c:otherwise>
 				<%@ include file="/WEB-INF/views/include/include-main.jspf"%>

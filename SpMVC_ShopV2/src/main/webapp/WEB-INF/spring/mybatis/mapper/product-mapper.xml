@@ -14,7 +14,7 @@
 			P_STD,
 			P_IPRICE,
 			P_OPRICE,
-			P_IMAGE,
+			P_IMAGE
  		) VALUES (
 	 		#{p_code},
 			#{p_name},
@@ -22,7 +22,7 @@
 			#{p_std},
 			#{p_iprice},
 			#{p_oprice},
-			#{p_image},
+			#{p_image}
  		)
  	</insert>
  	<!-- 
@@ -43,7 +43,7 @@
 			p_iprice	= #{p_iprice, jdbcType=VARCHAR },
 			p_oprice	= #{p_oprice, jdbcType=VARCHAR },
 			p_image		= #{p_image, jdbcType=VARCHAR },
-			p_not_use	= #{p_not_use, jdbcType=VARCHAR }
+			p_not_use	= #{p_not_use}
 		WHERE p_code	= #{p_code, jdbcType=VARCHAR }
  	</update>
  	<delete id="delete"></delete>
