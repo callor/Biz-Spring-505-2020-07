@@ -1,0 +1,113 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+
+<style>
+nav {
+	width: 100%;
+	background-color: #00316b;
+}
+
+ul {
+	width: 80%;
+	margin: 0 auto;
+	display: flex; 
+}
+
+ul li {
+	list-style-type: none;
+	padding: 20px;
+	color: white;
+	cursor: pointer;
+}
+
+ul li:nth-child(4) {
+	margin-left: auto;
+}
+
+ul li:hover {
+	background-color: white;
+	color: blue;
+}
+
+div.toggle {
+	width: 100%;
+	padding: 10px 20px;
+	text-align: right;
+	color: white;
+	font-size: 20px;
+	/* 기본화면(PC용 view port)에서는  toggle div box를 감추어라 */
+	display: none;
+}
+
+/* view port 화면의 width가 768px보다 작아지면 적용할 CSS */
+@media ( max-width :768px) {
+	/* 768px 보다 작아지면 toggle div box를 보여달라 */
+	div.toggle {
+		display: block;
+	}
+	ul {
+		width: 100%;
+		display: none;
+	}
+	ul li {
+		display: block;
+		text-align: center;
+		color: white;
+	}
+	ul li:hover {
+		background-color: gray;
+	}
+	.active {
+		display: block;
+	}
+}
+</style>
+<script>
+	$(function() {
+		/* 
+		햄버거(샌드위치) 버튼을 클릭했을때 반응하기
+		ul tag에 active 클래스를 적용, 비적용하여 보이게, 보이지 않게
+		처리 하는 코드
+		 */
+		$(".menu").click(function() {
+			$("ul").toggle("active")
+		})
+		
+		$("nav ul li").click(function(){
+			var text = $(this).text();
+			if(text == "상품관리") {
+				document.location.href = "${rootPath}/product/"
+			} else if(text == "거래처관리") {
+				document.location.href ="${rootPath}/dept/"
+			} else if(text == "Home") {
+				document.location.href ="${rootPath}/"
+			} else if(text == "로그아웃") {
+				document.location.href = "${rootPath}/member/logout"				
+			} else if(text == "로그인") {
+				document.location.href = "${rootPath}/member/login"				
+			} else if(text == "회원가입") {
+				document.location.href="${rootPath}/member/join"
+			}
+		})
+	})
+</script>
+<nav>
+	<div class="toggle">
+		<i class="fas fa-bars menu"></i>
+	</div>
+	<ul>
+		<li>Home</li>
+		<li>상품관리</li>
+		<li>거래처관리</li>
+		<c:if test="${empty LOGIN}">
+			<li>로그인</li>
+			<li>회원가입</li>
+		</c:if>
+		<c:if test="${not empty LOGIN}">
+			<li>로그아웃</li>
+			<li>${LOGIN.m_name}</li>
+		</c:if>
+	</ul>
+</nav>

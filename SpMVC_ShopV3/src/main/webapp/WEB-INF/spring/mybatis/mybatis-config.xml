@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+
+	<!-- 
+	mapper.xml의 insert, udpate 명령문의 각 칼럼에
+	jdbcType=VARCHAR 등과 같은 코드를 자동으로 생성하라
+	-->	
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="com.biz.shop.model.ProductVO" alias="ProVO"/>
+		<typeAlias type="com.biz.shop.model.DeptVO" alias="DeptVO"/>
+		<typeAlias type="com.biz.shop.model.MemberVO" alias="MemVO"/>
+	</typeAliases>
+</configuration>
+
+
+

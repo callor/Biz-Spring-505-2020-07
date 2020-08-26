@@ -1,0 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set var="rootPatd" value="${pageContext.request.contextPath}" />
+<tr class="dept_item">
+	<td>${VO.d_code}</td>
+	<td>${VO.d_name}</td>
+	<td>${VO.d_ceo}</td>
+	<td>${VO.d_tel}</td>
+	<td>${VO.d_manager}</td>
+	<td>${VO.d_mn_tel}</td> 
+</tr>

@@ -1,0 +1,50 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c" %>
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<style>
+	table {
+		width:80%;
+		margin:10px auto;
+		border-collapse:collapse;
+		border:1px solid #ccc;
+	}
+	th, td {
+		border :1px solid #ddd;
+		padding:8px;
+	}
+	
+	th {
+		text-align: right;
+	}
+	
+	td {
+		text-align: left;
+	}
+</style>        
+<table>
+	<tr>
+		<th>거래처코드</th><td>${DEPT_VO.d_code}</td>
+	</tr>
+	<tr>
+		<th>거래처명</th><td>${DEPT_VO.d_name}</td>
+	</tr>
+	<tr>
+		<th>대표자명</th><td>${DEPT_VO.d_ceo}</td>
+	</tr>
+	<tr>
+		<th>대표전화</th><td>${DEPT_VO.d_tel}</td>
+	</tr>
+	<tr>
+		<th>주소</th><td>${DEPT_VO.d_address}</td>
+	</tr>
+	<tr>
+		<th>담당자명</th><td>${DEPT_VO.d_manager}</td>
+	</tr>
+	<tr>
+		<th>담당연락처</th><td>${DEPT_VO.d_mn_tel}</td>
+	</tr>
+	<tr>
+		<th></th><td>${DEPT_VO.d_not_use}</td>
+	</tr>
+</table>
