@@ -1,0 +1,102 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form"  prefix="form"%>
+
+<c:set var="rootPath" value="${pageContext.request.contextPath}" />
+<link rel="stylesheet" type="text/css" href="${rootPath}/static/css/input.css?ver=2020-08-24" />
+<script>
+	/*
+	js 코드를 외부 파일에 작성하고 import 하면
+	jsp 파일에서 사용하던 el tag는 사용이 불가능해 진다.
+	src = "${rootPath}/pro/insert" 형식으로 사용하던 코드는 사용이 불가능해진다
+	그때문에 el tag의 ${rootPath} 값을 js의 rootPath라는 변수로 
+	선언해주고
+	외부의 js 파일에서 사용할수 있도록 해주어야 한다.
+	 */
+	var rootPath = "${rootPath}"
+</script>
+<script>
+	$(function() {
+		function getPCode() {
+			$.ajax({
+				type : "GET",
+				url : "${rootPath}/api/product/get_pcode",
+				success : function(result) {
+					$("#p_code").val(result)
+				},
+			});
+		}
+		$("#p_code_gen").click(getPCode);
+		$("#btn_save").click(function() {
+			/*
+			js 변수선언 키워드
+			var, let, const
+			var : public 전역변수 선언, 함수와 함수간에 데이터를 공유
+			let : 함수(function) scope형 변수 한번 선언되면 
+					그 변수는 다시 선언할수 없다
+					
+			const : 상수, 값이 한번 저장되면 그 값은 변경할 수 없다.
+			
+			ES6(ESCMA2015) 이상의 JS에서는 변수를 선언할때
+				코드중간에 값을 변경해야할 필요가 없으면 const
+				함수내에서 변수를 선언할때는 let
+				특별히 public scope로 선언할때는 var
+				
+				순서는 const 를 먼저 고려, let, var 순으로 생각하자
+				가급적 var는 자제하자
+			 */
+			const p_code = $("#p_code").val();
+			const p_name = $("#p_name").val();
+
+			if (p_code == "") {
+				if (confirm("상품코드는 반드시 필요합니다\n" + "상품코드를 생성할까요")) {
+					getPCode()
+				}
+				return false
+			}
+			if (p_name == "") {
+				alert("상품이름은 반드시 입력해야 합니다")
+				$("#p_name").focus()
+				return false
+			}
+			$("form").submit()
+		})
+	})
+</script>
+<form:form modelAttribute="PRO_VO">
+	<fieldset>
+		<legend>상품정보 등록</legend>
+		<div>
+			<label>상품코드</label> 
+			<form:input path="p_code" class="m_code"/>
+			<button type="button" id="p_code_gen" class="m_code_gen">코드생성</button>
+		</div>
+		<div>
+			<label>상품이름</label> 
+			<form:input path="p_name" />
+		</div>
+		<div>
+			<label>주매입처</label> 
+			<form:input path="p_dcode" />
+		</div>
+		<div>
+			<label>상품규격</label> 
+			<form:input path="p_std" />
+		</div>
+		<div>
+			<label>매입가격</label> 
+			<form:input type="number" path="p_iprice"/>
+		</div>
+		<div>
+			<label>판매가격</label> 
+			<form:input type="number" path="p_oprice" />
+		</div>
+		<div>
+			<label>대표이미지</label><input type="file" id="p_image" />
+		</div>
+		<div id="btn_box">
+			<button type="button" id="btn_list">리스트</button>
+			<button type="button" id="btn_save">저장</button>
+		</div>
+	</fieldset>
+</form:form>
