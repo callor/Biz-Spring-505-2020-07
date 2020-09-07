@@ -16,8 +16,6 @@ public class EncryptExec {
 			encNation = bcrypt.encode(nation);
 			System.out.printf("%s : %s\n",nation,encNation);
 		}
-		
-				
 	}
 }
 

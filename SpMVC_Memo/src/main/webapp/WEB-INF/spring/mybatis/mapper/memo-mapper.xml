@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- 
+ mybatis 2.x이상에서는 namespace를 반드시 실제 존재하는 
+ Dao(Mapper)인터페이스를 지정해주어야 한다.
+ mybatis 2.0 미만에서는 선택사항
+ --> 
+ <mapper namespace="com.biz.memo.mapper.MemoDao">
+ 
+ 	<select id="selectAll"></select>
+ 	<select id="findById"></select>
+ 	<insert id="insert"></insert>
+ 	<update id="update"></update>
+ 	<delete id="delete"></delete>
+ 
+ </mapper> 

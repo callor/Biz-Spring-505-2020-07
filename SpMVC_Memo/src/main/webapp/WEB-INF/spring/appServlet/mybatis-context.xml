@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- 
+	mybatis-context.xml
+	spring 프로젝트에서 jdbc, DBMS와 중간에서 데이터연결을 쉽게 구현할수 있도록
+	만드는데 필요한 설정을 해 놓는곳
+	여기에 설정된 내용은 개발자가 직접 접근하는 일은 거의 없다.
+	설정만 해두면 Mapper를 통해서 sql을 실행할때 자동으로
+	서로 협력하여 작동되는 구조
+	그 연결만 잘 설정해 두면 된다.
+	-->
+
+	<!-- 
+	dataSource
+	commons-dbcp2를 통해서 DB 연결 Connection설정 
+	-->
+	<bean id="oDS" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" 
+				value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="user1"/>
+		<property name="password" value="user1"/>
+	</bean>
+	
+	<!-- sqlSessionFactory -->
+	<!-- mapperLcations : mapper.xml 파일이 있을 곳 지정 -->
+	<!-- configLocation : maybatis-config.xml 파일을 지정 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="oDS"/>
+		<property name="mapperLocations" 
+				value="/WEB-INF/spring/mybatis/mapper/*-mapper.xml"/>
+		<property name="configLocation" 
+				value="/WEB-INF/spring/mybatis/mybatis-config.xml"/>
+	</bean>
+	
+	<!-- sqlSessionTemplate -->
+	<bean id="sqlSessionTemplate" 
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory"/>	
+	</bean>
+
+	<!-- 
+	dao 인터페이스의 패키지를 지정
+	dao는 mybatis에서는 mapper 인터페이스 라고 명명해주는 것이 좋다.
+	dao.insert(), dao.selectAll() 사용할 인터페이스들
+	mapper.insert(), mapper.selectAll() 이라고 하는것이 좋은 명명
+	(실무에서는 dao라는 명명법, mapper 라는 명명법을 혼용해서 사용한다)
+	
+	mybatis-spring의 기능을 사용하여
+	*.mapper 패키지에 있는 인터페이스 를 스켄하여 
+	mapper 객체(bean, component)를 생성해 달라
+	 -->
+	<mybatis-spring:scan base-package="com.biz.memo.mapper"/>
+
+
+
+</beans>
