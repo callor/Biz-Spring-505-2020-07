@@ -4,6 +4,7 @@
 
 ## 도서 등록
 * 도서명을 입력하여 네이버 도서 API로 부터 도서정보 가져오기
+* https://openapi.naver.com/v1/search/book.json?query=자바
 * 가져온 정보를 나의 DB에 저장
 
 ## 독서록 정리
