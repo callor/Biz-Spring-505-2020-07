@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- dataSource -->
+	<bean class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName"/>
+		<property name="url"/>
+		<property name="username"/>
+		<property name="password"/>
+	</bean>
+	<!-- SqlSessionFactory -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource"/>
+		<property name="mapperLocations"/>
+		<property name="configLocation"/>
+	</bean>
+	<!-- SqlSessionTemplate -->
+	<bean class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg/>
+	</bean>
+	
+	<!-- dao scan하도록 설정 -->
+	<!-- 자동으로 mapper를 만들도록 설정 -->
+	<mybatis-spring:scan base-package=""/>
+
+
+</beans>
+
+
+
+
