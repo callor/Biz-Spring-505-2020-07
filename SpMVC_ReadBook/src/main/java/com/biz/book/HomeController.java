@@ -1,11 +1,9 @@
 package com.biz.book;
 
-import java.text.DateFormat;
-import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.biz.book.model.BookVO;
 import com.biz.book.service.NaverService;
 
 /**
@@ -33,14 +32,12 @@ public class HomeController {
 	@RequestMapping(value="/book",
 			method=RequestMethod.POST,
 			produces = "application/json;charset=utf8")
-	public String naver(String book_name) {
+	public List<BookVO> naver(String book_name) {
 		
-		
-		String queryURL = naverService.queryURL(book_name);
+		String queryURL = naverService.queryURL("BOOK",book_name);
 		String resString = naverService.getNaverBook(queryURL);
-		
-		return resString;
+		List<BookVO> bookList = naverService.getJsonObject(resString);
+		return bookList;
 	}
-	
 	
 }

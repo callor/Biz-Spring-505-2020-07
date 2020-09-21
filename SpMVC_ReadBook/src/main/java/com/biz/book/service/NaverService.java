@@ -3,13 +3,24 @@ package com.biz.book.service;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
 import com.biz.book.config.NaverSecret;
+import com.biz.book.model.BookVO;
+
+import lombok.extern.slf4j.Slf4j;
 
 /*
  * naver API 통하여 도서명을 보내고
@@ -21,15 +32,31 @@ import com.biz.book.config.NaverSecret;
  * 4. BookVO에 담고
  * 5. List<BookVO>에 담기 
  */
+@Slf4j
 @Service
 public class NaverService {
 
 	// 도서명을 매개변수로 받아서 queryURL을 생성
-	public String queryURL(String bookName) {
+	public String queryURL(String category, String bookName) {
 		
+		log.debug(category);
 		String queryURL = NaverSecret.NAVER_BOOK_JSON;
+		if(category.equalsIgnoreCase("NEWS")) {
+			queryURL = NaverSecret.NAVER_NEWS_JSON;
+		} else if ( category.equalsIgnoreCase("MOVIE")) {
+			queryURL = NaverSecret.NAVER_MOVIE_JSON;
+		}
+		
+		String encodeText = null;
+		try {
+			//한글 검색을 위해서 검색어를 UTF로 encoding 처리해주어야 한다.
+			encodeText = URLEncoder.encode(bookName.trim(),"UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		// url?query=자바
-		queryURL += String.format("?query=%s",bookName);
+		queryURL += String.format("?query=%s",encodeText);
 		
 		// 한번에 조회할 데이터 개수를 지정할수 있다
 		queryURL += "&display=10"; 
@@ -66,34 +93,32 @@ public class NaverService {
 			
 			BufferedReader buffer = null;
 			InputStreamReader is = null;
-			String reader = new String();
 			
+
 			if(resCode == 200) {
 				// naver가 정상적으로 응답을 할것이다
 				is = new InputStreamReader(httpConn.getInputStream());
-				
-				// InputStreamReader와 BufferedReader를 파이프로 연결
-				buffer = new BufferedReader(is);
-				StringBuffer sBuffer = new StringBuffer();
-				while(true) {
-					reader = buffer.readLine();
-					if(reader == null) break;
-					sBuffer.append(reader);
-				}
-				return sBuffer.toString();
-			
 			} else {
-				// naver가 거부를 할것이다.
 				is = new InputStreamReader(httpConn.getErrorStream());
-				buffer = new BufferedReader(is);
-				StringBuffer eBuffer = new StringBuffer();
-				while(true) {
-					reader = buffer.readLine();
-					if(reader == null) break;
-					eBuffer.append(reader);
-				}
-				return eBuffer.toString();
 			}
+				
+			// InputStreamReader와 BufferedReader를 파이프로 연결
+			buffer = new BufferedReader(is);
+			StringBuffer sBuffer = new StringBuffer();
+			// String sBuffer = "";
+			String reader = new String();
+			while(  (reader=buffer.readLine()) != null  ) {
+				sBuffer.append(reader);
+				// sBuffer += reader;
+			}
+			
+//			while(true) {
+//				reader = buffer.readLine();
+//				if(reader == null) break;
+//				sBuffer.append(reader);
+//			}
+			buffer.close();
+			return sBuffer.toString();
 			
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
@@ -105,6 +130,66 @@ public class NaverService {
 		
 		return null;
 	}
+	
+	// jsonString을 parsing 하여 Object(VO 등등)으로 바꾸는 기능
+	public List<BookVO> getJsonObject(String jsonString ) {
+		
+		List<BookVO> bookList = new ArrayList<BookVO>();
+		JSONParser jParser = new JSONParser();
+		try {
+			// JSONParser도구를 사용하여 JSON형태의 문자열을
+			// JSONObject(객체)로 변환하기
+			JSONObject jObject = (JSONObject) jParser.parse(jsonString);
+			JSONArray jArray = (JSONArray) jObject.get("items");
+			
+			int size = jArray.size();
+			for(int i = 0 ; i < size ; i++) {
+				JSONObject jo = (JSONObject) jArray.get(i);
+				
+				// bookVO = new BookVO(title,link,image,autho,price..);
+				/*
+				BookVO bookVO = new BookVO();
+				bookVO.setTitle(jo.get("title").toString());
+				bookVO.setImage(jo.get("image").toString());
+				bookVO.setLink(jo.get("link").toString());
+				*/
+				/*
+				 * VO @Builder 를 설정하므로써
+				 * VO객체를 생성할때 Builder 패턴을 사용할수 있다.
+				 * GoF 패턴 중 생성자 패턴 중 1가지
+				 */
+				String descript = "";
+				if(jo.get("director") != null) {
+					descript += String.format("감독: %s <br>", jo.get("director").toString());
+				}
+				if(jo.get("actor") != null) {
+					descript += String.format("출연: %s <br>", jo.get("actor").toString());
+				}
+				if(jo.get("userRating") != null) {
+					descript += String.format("평점: %s <br>", jo.get("userRating").toString());
+				}
+
+				BookVO bookVO = BookVO.builder()
+						.title(jo.get("title").toString())
+						.image(jo.get("image") == null 
+								? "noImage" 
+								: jo.get("image").toString())
+						.link(jo.get("link").toString())
+						.description(jo.get("description") == null
+								? descript
+								: jo.get("description").toString())
+						.build();
+				bookList.add(bookVO);
+			}
+			return bookList;
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+	
 	
 	
 	
