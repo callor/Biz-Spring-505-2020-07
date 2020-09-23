@@ -45,7 +45,7 @@ public class BookApiController {
 		 * 도서 리스트를 return 해주는 method 이다
 		 * 도서명으로 검색을 하면 당연히 1개 이상의 데이터가 return되어
 		 * List형이 될것이다.
-		 * 만약 ISBN으로 검색을 하면 ISBN은 중복값이 없으로
+		 * 만약 ISBN으로 검색을 하면 ISBN은 중복값이 없어
 		 * 당연히 1개만 return이 될것이다.
 		 * 하지만 이 method는 태생이 List를 return하도록 만들어져 있기 때문에
 		 * 1개의 데이터라도 List<BookVO>에 담겨서 return된다
