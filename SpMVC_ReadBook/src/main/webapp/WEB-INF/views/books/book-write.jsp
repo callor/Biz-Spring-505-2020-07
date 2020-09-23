@@ -80,11 +80,9 @@
 		box-shadow: 5px 5px 5px rgba(0,0,0,0.3);
 	}
 	
+	/* Modal 설정
+	-----------------------------*/
 	section#book-modal {
-		display: none;
-		align-items: center;
-		justify-content: center;
-
 		position: fixed;
 		top:0;
 		left:0;
@@ -92,13 +90,46 @@
 		height:100%;
 		background-color: rgba(0,0,0,0.4);
 	}
-	section#book-modal div {
+	article#modal-body {
+		position:absolute;
+		top:50%;
+		left:70%;
+		width:70%;
+		height:50%;
+		transform: translate(-50%, -50%);
+		display:flex;
+		flex-flow:column nowrap;
+	}
+	div#modal-header {
+		flex:1;		
 		width:60%;
-		height:70%;
+		text-align: right;
+		background-color: rgba(100,100,100,1);
+	}
+	
+	div#modal-header span {
+		font-size: 30px;
+		font-weight: 500;
+		color:white;
+		cursor: pointer;
+		margin:15px;
+	}
+	div#modal-header span:hover {
+		color:red;
+	}
+
+	div#search-result {
+		flex:7;
+		width:60%;
+		padding:30px;
+		overflow:auto;
+		
 		background-color: rgba(255,255,255,1);
 		border:1px solid rgba(0,0,255,1);
-		overflow: auto;
-		padding:20px;
+		
+		box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
+		border-bottom-left-radius: 15px; 
+		border-bottom-right-radius: 15px;
 	}
 	
 </style>
@@ -123,7 +154,7 @@
 				// return 하면 그 결과를
 				// #search-result div box에 채워서 보여달라
 				success : function(result) {
-					$("#search-result").html(result)
+					// $("#search-result").html(result)
 				},
 				error : function(error) {
 					alert("서버 통신 오류!!")
@@ -132,9 +163,34 @@
 			$("#book-modal").css("display","flex")
 		})
 		
-		$("#book-modal").click(function(){
+		// x 표시를 클릭했을때 modal 창 닫기
+		$("#book-modal div.header span").click(function(){
 			$("#book-modal").css("display","none")
 		})
+		/*
+		동적으로 구현된 HTML에 event 핸들링 설정하기
+		현재 document(HTML 문서)가 생성되는 동안이 없던 tag를
+		JS(JQ)코드에서 동적으로 생성했을 경우 화면에 그려지는 것은
+		아무런 문제가 없으나
+		
+		JS에서 event핸들러를 설정할때 아직 화면에 없는 tag에 연결을 하면
+		무시해 버리고 없던일로 만들어 버린다.
+		
+		사후에(HTML 문서가 완성된 후) JS 코드로 생성할 tag(id, class)에
+		event를 설정하려면 자체에 설정하지 않고
+		가장 상위 객체인 document에 on 함수를 사용하여 event를 설정한다.
+		$(document).on("event","대상",function(){ } )
+		
+		주의사항
+		
+		
+		*/
+		
+		$(document).on("click","div.book-select",function(){
+			let isbn = $(this).data("isbn")
+			alert(isbn)
+		})
+	
 	})
 	
 </script>
@@ -166,7 +222,12 @@
 </form>
 
 <section id="book-modal">
-	<div id="search-result"></div>
+	<article id="modal-body">
+		<div id="modal-header">
+			<span>&times;</span>
+		</div>
+		<div id="search-result"></div>
+	</article>
 </section>
 
 </body>

@@ -74,7 +74,7 @@ public class NaverController {
 		
 		log.debug(bookList.toString());
 		model.addAttribute("NAVERS",bookList);
-		return "naver/naver-list";
+		return "naver/naver-search-list";
 	
 	}
 	
