@@ -46,7 +46,6 @@
 
 </table>
 <a href="${rootPath}/books/input">새로작성</a>
-
 </body>
 </html>
 
