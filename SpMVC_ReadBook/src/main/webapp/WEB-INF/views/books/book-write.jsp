@@ -88,7 +88,16 @@
 		left:0;
 		width:100%;
 		height:100%;
-		background-color: rgba(0,0,0,0.4);
+		/* 
+		!important
+		색상을 지정했을때
+		다른 CSS 하고 충돌하여 색상지정이 원하는대로
+		안되는 경우가 있다.
+		이때 !important를 지정하면
+		앞에서 지정한 색상을 무시하고 지금 지정한 값으로
+		강제 지정하라
+		*/
+		background-color: rgba(0,0,0,0.4) !important;
 	}
 	article#modal-body {
 		position:absolute;
@@ -97,6 +106,7 @@
 		width:70%;
 		height:50%;
 		transform: translate(-50%, -50%);
+
 		display:flex;
 		flex-flow:column nowrap;
 	}
@@ -154,17 +164,17 @@
 				// return 하면 그 결과를
 				// #search-result div box에 채워서 보여달라
 				success : function(result) {
-					// $("#search-result").html(result)
+					$("#search-result").html(result)
 				},
 				error : function(error) {
 					alert("서버 통신 오류!!")
 				}
 			})
-			$("#book-modal").css("display","flex")
+			$("#book-modal").css("display","block")
 		})
 		
 		// x 표시를 클릭했을때 modal 창 닫기
-		$("#book-modal div.header span").click(function(){
+		$("div#modal-header span").click(function(){
 			$("#book-modal").css("display","none")
 		})
 		/*
@@ -182,15 +192,57 @@
 		$(document).on("event","대상",function(){ } )
 		
 		주의사항
+		$(selector).click(function(){}) 
+		만약 기존에 selector에 click event가 설정되어 있으면
+		기존의 이벤트를 덮어쓰기 한다.
 		
+		$(document).on("event","selector")
+		만약 기존에 selector에 대한 click event가 설정되어 있더라도
+		중복 정의 된다.
 		
+		동적으로 여는곳에서는 
+		$(document).on() 을 사용하여 event 핸들러를 설정하고
+		
+		동적으로 열리는 곳에서는 절대 $(document).on() 사용하면 안된다.
+		동적으로 열리는 곳에서는 $(selector).click() 를 사용하자
+	
 		*/
-		
 		$(document).on("click","div.book-select",function(){
 			let isbn = $(this).data("isbn")
-			alert(isbn)
+			
+			// 13자리 isbn 추출
+			// 코드의 오른쪽에서 13자리를 잘라내라
+			let length = isbn.length
+			isbn = isbn.substring(length - 13)
+			
+			$.ajax({
+				url : "${rootPath}/api/isbn",
+				method :"POST",
+				data : {"search_text" : isbn}
+			})
+			.done(function(bookVO){
+				// alert(JSON.stringify(bookVO))
+				$("#seq").val(bookVO.seq);
+				$("#title").val(bookVO.title);
+				$("#link").val(bookVO.link);
+				$("#image").val(bookVO.image);
+				$("#author").val(bookVO.author);
+				$("#price").val(bookVO.price);
+				$("#discount").val(bookVO.discount);
+				$("#publisher").val(bookVO.publisher);
+				$("#isbn").val(bookVO.isbn);
+				$("#description").val(bookVO.description);
+				$("#pubdate").val(bookVO.pubdate);
+				$("#buydate").val(bookVO.buydate);
+				$("#buyprice").val(bookVO.buyprice);
+				$("#buystore").val(bookVO.buystore);
+				$("section#book-modal").css("display","none")
+			})
+			.fail(function(xhr,textStatus,error){
+				alert("서버와 통신오류!")
+			})
 		})
-	
+		$("section#book-modal").css("display","none")
 	})
 	
 </script>

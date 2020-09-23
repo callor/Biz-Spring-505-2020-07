@@ -9,10 +9,7 @@
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <title>나의 홈페이지</title>
 <style>
-	body {
-		display: flex;
-		flex-flow: column wrap;
-	}
+
 	nav#search-nav {
 		width:100%;
 		background-color: green;
@@ -46,7 +43,6 @@
 	section#search-list {
 		display: flex;
 		flex-flow:column nowrap;
-		height: 100%;
 		justify-content: center;
 	}
 	

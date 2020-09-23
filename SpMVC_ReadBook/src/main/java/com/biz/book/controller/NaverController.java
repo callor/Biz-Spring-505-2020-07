@@ -32,7 +32,7 @@ public class NaverController {
 	@RequestMapping(value="/search",method=RequestMethod.GET)
 	public String search(String search_text) {
 		log.debug("search");
-		return "naver";
+		return "naver/naver-list";
 	}
 	
 	/*
