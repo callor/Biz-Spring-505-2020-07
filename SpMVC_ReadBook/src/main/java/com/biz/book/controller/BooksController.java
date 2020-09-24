@@ -26,6 +26,7 @@ public class BooksController {
 		
 		List<BookVO> bookList = bookDao.selectAll();
 		model.addAttribute("BOOKS",bookList);
+		model.addAttribute("BODY","BOOK-LIST");
 		return "books/book-list";
 	}
 	
