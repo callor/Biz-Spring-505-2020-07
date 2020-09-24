@@ -8,14 +8,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Read Book 2020</title>
-    <link href="${rootPath}/static/css/index.css" rel="stylesheet" />
+    <link href="${rootPath}/static/css/index.css?ver=2020-09-24" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script>
     	// js 파일에서 el tag의 ${rootPath} 값을 참조하기 위해서
     	// rootPath 변수를 전역으로 선언해 둔다
     	var rootPath = "${rootPath}"
     </script>
-    <script src="${rootPath}/static/js/main-nav.js"></script>
+    <script src="${rootPath}/static/js/main-nav.js?ver=2020-09-24"></script>
   </head>
   <body>
     <header>
@@ -36,16 +36,20 @@
     </nav>
     <section id="main-section">
     <c:choose>
-    	<c:when test="${BODY == 'BODY-LIST'}">
+    	<c:when test="${BODY == 'BOOK-LIST'}">
     		<%@ include file="/WEB-INF/views/books/book-list.jsp" %>
     	</c:when>
+    	<c:when test="${BODY == 'BOOK-WRITE'}">
+    		<%@ include file="/WEB-INF/views/books/book-write.jsp" %>
+    	</c:when>
+    	<c:when test="${BODY == 'BOOK-DETAIL'}">
+    		<%@ include file="/WEB-INF/views/books/book-detail.jsp" %>
+    	</c:when>
     	
-    	
+		<c:otherwise>
+    		BODY		
+    	</c:otherwise>
     </c:choose>
-    
-    BODY
-    
-    
     </section>
     <footer>
       <address>CopyRight &copy; callor@callor.com</address>

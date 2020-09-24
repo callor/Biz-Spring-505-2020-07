@@ -2,17 +2,28 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
- <mapper namespace="com.biz.book.mapper.BookDao">
- 
- 	<select id="selectAll" resultType="BookVO">
- 		SELECT * FROM tbl_books
- 	</select>
- 	<select id="findById" resultType="BookVO">
- 		SELECT * FROM tbl_books WHERE seq = #{seq}
- 	</select>
- 	<insert id="insert"></insert>
- 	<update id="update"></update>
- 	<delete id="delete"></delete>
- 
- </mapper> 
+
+<mapper namespace="com.biz.book.mapper.BookDao">
+
+	<select id="selectAll" resultType="BookVO">
+		SELECT * FROM tbl_books
+	</select>
+	<select id="findById" resultType="BookVO">
+		SELECT * FROM tbl_books WHERE seq = #{seq}
+	</select>
+	<insert id="insert">
+		INSERT INTO tbl_books (
+			seq, title, link, image, author, price,
+			discount, publisher, isbn, description, pubdate,
+			buydate, buyprice, buystore
+		) VALUES (
+			SEQ_BOOKS.NEXTVAL,
+			#{title}, #{link}, #{image},#{author}, #{price},
+			#{discount}, #{publisher}, #{isbn}, #{description}, #{pubdate},
+			#{buydate}, #{buyprice}, #{buystore}
+		)
+	</insert>
+	<update id="update"></update>
+	<delete id="delete"></delete>
+
+</mapper> 
