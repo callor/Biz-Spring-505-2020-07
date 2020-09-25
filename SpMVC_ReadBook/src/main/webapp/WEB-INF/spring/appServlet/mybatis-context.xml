@@ -9,12 +9,41 @@
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context-4.3.xsd
 		http://www.springframework.org/schema/tx https://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
+	<!-- 
+	PBEenctypt 클래스에서 사용할 
+	알고리즘과 saltPass 를 설정하는 도우미 클래스
+	saltPass를 가져오기 위해서 반드시 property에 passwordEnvName을 사용하자
+	이 속성을 사용하면 Server의 환경 변수에서 값을 가져올수 있다.
+	-->
+	<bean id="envConfig" class="org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig">
+		<property name="algorithm" value="PBEWithMD5AndDES"/>
+		<property name="passwordEnvName" value="BIZ.NET"/>
+	</bean>
+	
+	<!-- 암호문을 복호화 하는 용도로 사용할 클래스 -->
+	<bean id="encConvert" class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">
+		<property name="config" ref="envConfig"/>
+	</bean>
+	<!-- 
+	*.properties 파일을 읽어서 ENC(**)로 되어 있는 문자열을 추출하여
+	PBE*Encryptor에게 보내서 암호문을 복호화 한후 필요한 곳에 주입해주는 역할
+	-->
+	<bean class="org.jasypt.spring31.properties.EncryptablePropertyPlaceholderConfigurer">
+		<constructor-arg ref="encConvert"/>
+		<property name="fileEncoding" value="UTF-8"/>
+		<property name="locations">
+			<list>
+				<value>/WEB-INF/spring/db.connect.properties</value>
+			</list>
+		</property>
+	</bean>
+
 	<!-- dataSource -->
 	<bean id="ds" class="org.apache.commons.dbcp2.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
-		<property name="username" value="user1"/>
-		<property name="password" value="user1"/>
+		<property name="username" value="${oracle.username}"/>
+		<property name="password" value="${oracle.password}"/>
 	</bean>
 	<!-- sqlSessionFactory -->
 	<bean id="sqlFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -22,11 +51,20 @@
 		<property name="mapperLocations" value="/WEB-INF/spring/mybatis/mapper/*-mapper.xml"/>
 		<property name="typeAliasesPackage" value="com.biz.book.model"/>
 	</bean>
-	
+
 	<!-- sqlSessionTemplate -->
+	<!-- 
 	<bean class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlFactory" index="0"/>
 	</bean>
-	<mybatis-spring:scan base-package="com.biz.book.mapper"/>
+	 -->
+	 <tx:annotation-driven/>
+	 <bean id="transactionManager" 
+	 	class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	 	<property name="dataSource" ref="ds"/>
+	 </bean>
+	 
+	 <mybatis-spring:scan base-package="com.biz.book.mapper"/>
+
 
 </beans>

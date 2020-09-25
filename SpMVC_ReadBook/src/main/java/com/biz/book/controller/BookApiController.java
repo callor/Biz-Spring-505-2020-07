@@ -65,7 +65,7 @@ public class BookApiController {
 		return bookVO;
 	}
 		
-	@ResponseBody
+
 	@RequestMapping(value="/detail/{book_seq}",
 		method=RequestMethod.GET,
 		produces = "application/json;charset=utf8")

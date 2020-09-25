@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,6 +28,7 @@ public class BooksController {
 	@Autowired
 	private BookDao bookDao;
 	
+	@Transactional
 	// locatlhost:8080/book/books
 	// locatlhost:8080/book/books/
 	// @ResponseBody
@@ -63,11 +65,9 @@ public class BooksController {
 	}
 	
 	/*
-	 * 
 	 * spring form taglib를 사용하여 write form을 만들었을 경우에는
 	 * VO 클래스, 객체를 매개변수로 사용할때
 	 * @ModelAttribute("VO") 를 필수로 사용하자
-	 * 
 	 */
 	@RequestMapping(value="/input",method=RequestMethod.POST)
 	public String input(@ModelAttribute("bookVO") BookVO bookVO) {
