@@ -67,18 +67,21 @@ public class UserDetailServiceImplV1 implements UserDetailsService {
 		 UserDetailsVO userDetail = userDao.findById(username);
 
 		// 테스트를 위한 임시 사용자 정보 생성
+		 /*
 		userDetail = UserDetailsVO.builder()
 						.username(username)
 						.password("12341234")
 						.enabled(true)
 						.build();
+		*/
 		
 		if(userDetail == null) {
-			
 			// 강제로 일부러 UsernameNotFoundException을 발생시킨다.
 			throw new UsernameNotFoundException(username + " 정보를 찾을 수 없음");
 		}
 		log.debug("USER:" + userDetail.toString());
+		
+		userDetail.setEnabled(true);
 		return userDetail;
 		
 	}

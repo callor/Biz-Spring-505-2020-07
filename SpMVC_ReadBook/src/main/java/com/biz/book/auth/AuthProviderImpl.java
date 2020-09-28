@@ -14,6 +14,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.biz.book.model.AuthorityVO;
@@ -61,6 +62,9 @@ public class AuthProviderImpl implements AuthenticationProvider{
 	@Autowired
 	@Qualifier("userDetailServiceV1")
 	private UserDetailsService userService;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	/*
 	 * 사용자가 로그인을 수행했을때 username과, password를 주입받아서
@@ -81,9 +85,22 @@ public class AuthProviderImpl implements AuthenticationProvider{
 									.loadUserByUsername(username);
 		
 		// 2. 비밀번호 검사
+		// 비빌번호를 암호화 하지 않았을 경우 문자열 비교하기
+		/*
 		if(!password.equals(userVO.getPassword())) {
 			// 비번이 일치하지 않으면
 			throw new BadCredentialsException("비밀번호 오류");
+		}
+		*/
+		
+		// PasswordEncoder로 암호화된 비번 비교
+		/*
+		 * 사용자가 입력한 password 평문 문자열을 내부에서
+		 * 암호화 하여 DB에 저장되어 있는 암호화된 비번(userVO.getPassword())을
+		 * 비교하여 일치하는지 검사한다
+		 */
+		if(!passwordEncoder.matches(password, userVO.getPassword())) {
+			throw new BadCredentialsException("비빌번호가 일치하지 않음");
 		}
 		
 		// 3. 유효한 사용자 정보인가

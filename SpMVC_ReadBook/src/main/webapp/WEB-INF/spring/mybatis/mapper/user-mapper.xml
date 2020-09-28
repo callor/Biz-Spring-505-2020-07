@@ -8,10 +8,32 @@
 	<select id="selectAll" resultType="UserDetail">
 		SELECT * FROM tbl_member
 	</select>
+	<!-- tbl_member table의 사용자id와 비밀번호 칼럼의 이름과 -->
+	<!-- UserDetailsVO의 필드변수 이름이 다른 관계로 -->
+	<!-- SELECT 후에 자동으로 VO에 Setting이 안된다. -->
+	<!-- 이럴경우 SELECT SQL문에 projection을 적용하고 -->
+	<!-- 칼럼이름에 Alias 를 설정해 주어야 한다. -->
 	<select id="findById" resultType="UserDetail">
-		SELECT * FROM tbl_member WHERE m_userid = #{username}
+		SELECT 
+				m_userid AS username,
+				m_password AS password,
+				m_name,
+				m_tel,
+				m_address,
+				m_email
+		FROM tbl_member WHERE m_userid = #{username}
 	</select>
-	<insert id="insert">
+	
+	<insert id="insert" parameterType="UserDetail">
+		INSERT INTO tbl_member(
+			M_USERID,M_PASSWORD,
+			M_NAME,M_TEL,M_ADDRESS,M_EMAIL,
+			ENABLE, AccountNonExpired, AccountNonLocked, CredentialsNonExpired
+		) VALUES (
+			#{username},#{password},
+			#{m_name},#{m_tel},#{m_address},#{m_email},
+			'1','1','1','1'
+		)
 	</insert>
 	<update id="update"></update>
 	<delete id="delete"></delete>

@@ -60,4 +60,16 @@
 						access="hasAnyRole('ADMIN','USER')"/>
 		<security:intercept-url pattern="/**" access="permitAll()"/>
 	</security:http>
+	
+	
+	<!-- 회원가입, 로그인에서 사용자의 비밀번호를 암호화 하기 위하여 -->
+	<!-- 암호화 도구를 bean으로 설정 -->
+	<bean id="passwordEncoder" 
+			class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<constructor-arg value="4" index="0"/>
+	</bean>
+	
 </beans>
+
+
+
