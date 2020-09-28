@@ -30,6 +30,8 @@ $(function () {
       document.location.href = `${rootPath}/read/`;
     } else if (menu_id === "menu-join") {
       document.location.href = `${rootPath}/member/join`;
+    } else if (menu_id === "menu-logout") {
+      document.location.href = `${rootPath}/member/logout`;
     }
   });
 });

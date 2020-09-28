@@ -6,12 +6,14 @@ import org.apache.ibatis.type.Alias;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Alias("UserDetail")
 @Getter
 @Setter
+@Builder
 public class UserDetailsVO implements UserDetails{
 
 	/*
@@ -30,10 +32,10 @@ public class UserDetailsVO implements UserDetails{
 	private String username;
 	private String password;
 	
-	private boolean isEnabled;
-	private boolean isAccountNonExpired;
-	private boolean isAccountNonLocked;
-	private boolean isCredentialsNonExpired;
+	private boolean enabled;
+	private boolean accountNonExpired;
+	private boolean accountNonLocked;
+	private boolean credentialsNonExpired;
 	
 	// List<GrandtedAuthriy>
 	private Collection<? extends GrantedAuthority> authorities;
