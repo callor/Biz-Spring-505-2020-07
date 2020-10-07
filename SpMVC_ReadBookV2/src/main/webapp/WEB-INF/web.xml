@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	version="4.0">
+	
+	<filter>
+		<filter-name>encKor</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>encKor</filter-name>
+		<url-pattern>*</url-pattern>
+	</filter-mapping>
+
+	<!-- The definition of the Root Spring Container shared by all Servlets and Filters -->
+	<!-- mybatis-context.xml을 servlet 영역에서 context 영역으로 이동 -->
+	<!-- spring security UserDetailService 에서 -->
+	<!-- Dao, mapper 등을 필요로 하기 때문에 -->
+	<!-- 일반적인 프로젝트에서는 기존처럼 servlet영역에 설정을 하면 되지만  -->
+	<!-- spring security에서 DB로 부터 사용자 정보를 조회하는 기능을 사용하려면 -->
+	<!-- mybatis-context 가 context 영역에 있어야 한다. -->
+	<!-- param-value를 설정할때 *-context.xml 로 할수 있다 -->
+	<!-- 그런데 *-context.xml로 설정을 하면 -->
+	<!-- 각 xml 파일이 읽어지는 시점이 미묘하게 흐트러져 -->
+	<!-- bean을 서로 찾지못하는 문제가 발생할 수 있다. -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+		/WEB-INF/spring/mybatis-context.xml
+		/WEB-INF/spring/security-context.xml
+		/WEB-INF/spring/root-context.xml
+		</param-value>
+	</context-param>
+	
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class> org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>*</url-pattern>
+	</filter-mapping>
+	
+	<!-- Creates the Spring Container shared by all Servlets and Filters -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- Processes application requests -->
+	<servlet>
+		<servlet-name>appServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/*-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>appServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+</web-app>

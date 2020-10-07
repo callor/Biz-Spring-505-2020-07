@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.biz.book.mapper.BookDao">
+
+	<select id="selectAll" resultType="BookVO">
+		SELECT * FROM tbl_books
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO tbl_books (
+			seq, title, link, image, author, price,
+			discount, publisher, isbn, description, pubdate,
+			buydate, buyprice, buystore
+		) VALUES (
+			SEQ_BOOKS.NEXTVAL,
+			#{title}, #{link}, #{image},#{author}, #{price},
+			#{discount}, #{publisher}, #{isbn}, #{description}, #{pubdate},
+			#{buydate}, #{buyprice}, #{buystore}
+		)
+	</insert>
+	<update id="update" parameterType="BookVO">
+		UPDATE tbl_books SET
+			title		= #{title},
+			link		= #{link},
+			image		= #{image},
+			author		= #{author},
+			price		= #{price},
+			discount	= #{discount},
+			publisher	= #{publisher},
+			isbn		= #{isbn},
+			description	= #{description},
+			pubdate		= #{pubdate},
+			buydate		= #{buydate},
+			buyprice	= #{buyprice},
+			buystore	= #{buystore}
+		WHERE seq	= #{seq}
+	</update>
+	
+
+</mapper> 

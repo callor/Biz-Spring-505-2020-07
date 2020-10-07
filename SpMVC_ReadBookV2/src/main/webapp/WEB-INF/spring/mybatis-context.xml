@@ -54,9 +54,6 @@
 
 	<!-- sqlSessionTemplate -->
 	<!-- tx:annotaion-driven 을 사용한 transactional을 사용할 경우 SqlSessionTemplate은 필요치 않다 -->
-	<bean class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg ref="sqlFactory" index="0"/>
-	</bean>
 	<bean id="transactionManager" 
 	 	class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 	 	<property name="dataSource" ref="ds"/>
