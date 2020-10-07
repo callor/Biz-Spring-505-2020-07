@@ -81,7 +81,14 @@ public class UserDetailServiceImplV1 implements UserDetailsService {
 		}
 		log.debug("USER:" + userDetail.toString());
 		
-		userDetail.setEnabled(true);
+		/*
+		 * 사용자 정보테이블에서 enable 칼럼의 값이 boolean형으로
+		 * 설정을 하고
+		 * 최초에 회원가입을 했을때 이 값을 false로 세팅을 하고
+		 * email 인증과 같은 절차를 통과했을대 이 값을 true로 만들어서
+		 * 로그인이 될수 있도록 설정
+		 */
+		// userDetail.setEnabled(true);
 		return userDetail;
 		
 	}

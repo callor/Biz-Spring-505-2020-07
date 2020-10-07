@@ -1,10 +1,13 @@
 package com.biz.book.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -13,6 +16,16 @@ import com.biz.book.service.MemberService;
 
 import lombok.RequiredArgsConstructor;
 
+/*
+ * @SesssionAttributes("memberVO")항목을 설정하면
+ * 서버의 메모리에 memberVO 이름으로 객체변수를 마련해 놓는다.
+ * 이 변수는 서버가 재 시작하거나 하더라도 유지되는 성질이 있고
+ * 클라이언트에서 URL Request를 수행했을때 메모리에 계속 유지된다.
+ * 
+ * RequestMapping method에 @ModelAttribute("객체이름") 클래스 객체 형식으로
+ * 매개변수가 있으면 메모리에 저장된 객체변수에서 값을 추출하여
+ * 객체 포함해 준다
+ */
 @SessionAttributes("memberVO")
 @RequiredArgsConstructor
 @Controller
@@ -21,9 +34,16 @@ public class MemberController {
 
 	private final MemberService memberService;
 	
+	/*
+	 * @SessionAttributes("memberVO") 를 사용하려면
+	 * 반드시 memberVO를 생성하는 method가 클래스에 있어야 된다.
+	 * UserDetailsVO 클래스로 생성된 memberVO가 "memberVO" 이름으로 보관된다.
+	 * @SessionAttributes() 있는데 @ModelAttribute() 가 붙은 method가 없으면
+	 * 컴파일 오류가 난다.
+	 */
 	@ModelAttribute("memberVO")
 	public UserDetailsVO newMember() {
-		UserDetailsVO memberVO = UserDetailsVO.builder().build();
+		UserDetailsVO memberVO = new UserDetailsVO(); //UserDetailsVO.builder().build();
 		return memberVO;
 	}
 	
@@ -73,6 +93,12 @@ public class MemberController {
 		return "home";
 	}
 	
+	/*
+	 * @SessionAttributes()를 사용할때는
+	 * DB에 데이터를 insert, update를 최종수행하고 나면
+	 * SessionStatus 클래스의 setComplete() method 를 호출하여
+	 * 서버에 남아 있는 메모리를 clear해 주어야 한다.
+	 */
 	@RequestMapping(value="/join_comp",method=RequestMethod.POST)
 	public String join(@ModelAttribute("memberVO") UserDetailsVO userVO,SessionStatus status) {
 		memberService.insert(userVO);
@@ -80,6 +106,57 @@ public class MemberController {
 		return "redirect:/";
 	}
 
+	@RequestMapping(value="/mypage",method=RequestMethod.GET)
+	public String mypage(@ModelAttribute("memberVO") UserDetailsVO userVO,
+			Authentication authProvider,
+			Model model) {
+		
+		// 현재 로그인한 사용자의 정보를 추출하는 method
+		userVO = (UserDetailsVO) authProvider.getPrincipal();
+		userVO.setPassword("");
+		model.addAttribute("memberVO",userVO);
+		model.addAttribute("BODY","MEMBER-UPDATE");
+		return "home";
+	}
+	
+	@RequestMapping(value="/mypage",method=RequestMethod.POST)
+	public String mypage(@ModelAttribute("memberVO") UserDetailsVO userVO,Model model,String str) {
+		model.addAttribute("memberVO",userVO);
+		model.addAttribute("BODY","MEMBER-UPDATE-NEXT");
+		return "home";
+	}
+	
+	@RequestMapping(value="/update_comp",method=RequestMethod.POST)
+	public String update(@ModelAttribute("memberVO") UserDetailsVO userVO,SessionStatus status) {
+		memberService.update(userVO);
+		status.setComplete();
+		return "redirect:/";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/password_check",method=RequestMethod.POST)
+	public String password_check(String username, String password) {
+		return memberService.userNameAndPassword(username, password);
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/id_check",method=RequestMethod.POST)
+	public String id_check(String username) {
+		
+		// TDD(Test Driven Developer)
+		// memberService에 아직 구현되지 않은 method를 사용처에서 먼저 만들고
+		// 문법 오류가 발생하면 구체적으로 memberService method를 구현하는 방법
+		UserDetailsVO userVO = memberService.findById(username);
+		
+		// userVO가 null이면 username 이 DB에 없다
+		if(userVO == null) {
+			return "OK";
+		} else {
+			return "FAIL";
+		}
+	}
+	
 	
 	// logout.jsp 파일을 보여주기 위한 URL Mapping
 	@RequestMapping(value="/logout",method=RequestMethod.GET)

@@ -16,8 +16,14 @@
     	// js 파일에서 el tag의 ${rootPath} 값을 참조하기 위해서
     	// rootPath 변수를 전역으로 선언해 둔다
     	var rootPath = "${rootPath}"
+    	// main-nav.js 파일에서 el tag 변수값을 사용할수 없기 때문에
+    	// 별도로 2개의 변수를 선언하고,
+    	// headerName과 token 값을 저장해준다.
+    	// *.js 파일에서는 백팃을 사용하여 해당 변수를 사용할수 있다.
+    	var csrf_header = "${_csrf.headerName}"
+    	var csrf_token = "${_csrf.token}"
     </script>
-    <script src="${rootPath}/static/js/main-nav.js?ver=2020-09-28"></script>
+    <script src="${rootPath}/static/js/main-nav.js?ver=2020-10-07-001"></script>
   </head>
   <body>
     <header>
@@ -38,11 +44,7 @@
         </sec:authorize>
         <sec:authorize access="isAuthenticated()">
 	        <li id="menu-mypage">마이페이지</li>
-        	<li>
-        		<form:form action="${rootPath}/logout">
-        		<button>로그아웃</button>
-        		</form:form>
-        	</li>
+        	<li id="menu-logout">로그아웃</li>
         </sec:authorize>
         <sec:authorize access="hasRole('ADMIN')">
         	<li>관리자</li>
@@ -68,8 +70,15 @@
     	<c:when test="${BODY == 'MEMBER-JOIN-NEXT' }">
     		<%@ include file="/WEB-INF/views/member/member-write2.jsp" %>
     	</c:when>
+    	
+    	<c:when test="${BODY == 'MEMBER-UPDATE' }">
+    		<%@ include file="/WEB-INF/views/member/member-update.jsp" %>
+    	</c:when>
+    	<c:when test="${BODY == 'MEMBER-UPDATE-NEXT' }">
+    		<%@ include file="/WEB-INF/views/member/member-update2.jsp" %>
+    	</c:when>
   		
-			<c:otherwise>
+		<c:otherwise>
     		<%@ include file="/WEB-INF/views/main-body.jsp" %>		
     	</c:otherwise>
     </c:choose>

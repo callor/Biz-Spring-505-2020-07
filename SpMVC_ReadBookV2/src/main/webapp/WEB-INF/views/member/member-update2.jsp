@@ -16,9 +16,9 @@ Controller에서 member-write2.jsp를 열어서 회원가입을 두 화면에 �
 */
 %>			
 <form:form modelAttribute="memberVO" id="member-write" 
-				action="${rootPath}/member/join_comp">
+				action="${rootPath}/member/update_comp">
 	<fieldset>
-		<legend>회원가입 계속</legend>
+		<legend>회원정보 수정</legend>
 		<div>
 			<label>회원이름</label> 
 			<form:input path="m_name" />
@@ -37,7 +37,7 @@ Controller에서 member-write2.jsp를 열어서 회원가입을 두 화면에 �
 		</div>
 		<div id="btn_box">
 			<button type="button" id="btn_home">홈으로</button>
-			<button type="submit" id="btn_save">가입신청</button>
+			<button type="submit" id="btn_save">정보수정</button>
 		</div>
 	</fieldset>
 </form:form>

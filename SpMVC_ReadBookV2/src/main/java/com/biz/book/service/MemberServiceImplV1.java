@@ -50,11 +50,57 @@ public class MemberServiceImplV1 implements MemberService{
 		String encPassword = passwordEncoder.encode(password);
 		log.debug("password {} , encPassword {}",password, encPassword);
 		
+		/*
+		 * 회원테이블에 값이 없을때(0) 회원가입이 이루어지면
+		 * 그 회원은 admin 권한을 갖고
+		 * enabled 칼럼을 1세팅하여 즉시 로그인이 가능하도록
+		 * 자바에서 true로 값을 설정하면 오라클에서는 1로 저장
+		 * 
+		 * 두번째 가입되는 회원은
+		 * enabled 칼럼을 0으로 세팅하여 즉시 로그인이 안되록 설정
+		 * 자바에서 false로 값을 설정하면 오라클에서는 0으로 저장된다.
+		 * 
+		 * mysql 은 true와 false 그대로 저장된다
+		 */
+		int nCount = userDao.userCount();
+		if(nCount > 0) {
+			userVO.setEnabled(false); // 0 으로 세팅
+		} else {
+			userVO.setEnabled(true); // 1로 세팅
+		}
+		
 		// 평문으로 입력된 비밀번호를 암호화된 비밀번호로 대치
 		userVO.setPassword(encPassword);
 		userDao.insert(userVO);
-		
 		return 0;
+		
+	}
+
+	public String userNameAndPassword(String username, String password) {
+		
+		UserDetailsVO userVO = userDao.findById(username);
+
+		// passwordEncoder를 사용하여 암호화한 비밀번호는 일방향 비밀번호인까닭에
+		// decoder가 존재하지 않는다.
+		// 사용자가 입력한 비밀번호와 DB에 저장된 비밀번호를
+		// passwordEncoder.matches() method에 매개변수로 전달하면
+		// 비밀번호가 일치하는 확인하여 true, false를 리턴한다.
+		
+		// 결과값에 따라 3항연산자를 사용하여 OK 또는 FAIL 문자열을 Controller로  return
+		return passwordEncoder.matches(password, userVO.getPassword()) ? "OK" : "FAIL";
+	}
+	
+	@Override
+	public UserDetailsVO findById(String username) {
+
+		UserDetailsVO userVO = userDao.findById(username);
+		return userVO;
+	
+	}
+
+	@Override
+	public int update(UserDetailsVO userVO) {
+		return userDao.update(userVO);
 	}
 	
 	
