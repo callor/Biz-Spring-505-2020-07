@@ -85,8 +85,6 @@
 			<version>${org.jasypt-version}</version>
 		</dependency>
 
-
-
 		<!-- db 연동을 위한 Dependency 설정 -->
 		<!-- spring-jdbc -->
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->

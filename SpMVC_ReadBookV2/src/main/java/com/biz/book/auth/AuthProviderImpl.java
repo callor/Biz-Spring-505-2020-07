@@ -113,19 +113,22 @@ public class AuthProviderImpl implements AuthenticationProvider{
 		// 가. 임시로 사용자의 권한 리스트를 생성하기 위하여
 		// AuthorityVO를 담은 List를 생성하고
 		// 권한(ROLE)값을 지정하여 add()
-		List<AuthorityVO> authList = new ArrayList<AuthorityVO>();
-		authList.add(AuthorityVO.builder().m_role("ROLE_ADMIN").build());
-		authList.add(AuthorityVO.builder().m_role("ROLE_USER").build());
+		
+//		List<AuthorityVO> authList = new ArrayList<AuthorityVO>();
+//		authList.add(AuthorityVO.builder().authority("ROLE_ADMIN").build());
+//		authList.add(AuthorityVO.builder().authority("ROLE_USER").build());
 		
 		// 나. spring security의 hasRole() method에서 사용할 자료형으로 변환
-		List<GrantedAuthority> rollList = new ArrayList<>();
-		for(AuthorityVO auth : authList) {
-			rollList.add(new SimpleGrantedAuthority(auth.getM_role()));	
-		}
+//		List<GrantedAuthority> rollList = new ArrayList<>();
+//		for(AuthorityVO auth : authList) {
+//			rollList.add(new SimpleGrantedAuthority(auth.getAuthority()));	
+//		}
 		
 		// 로그인한 사용자에게 인증 token을 발생
 		// 사용자의 detail정보와 roll정보를 token에 같이 심어 놓는다.
-		return new UsernamePasswordAuthenticationToken(userVO, null,rollList);
+		return new UsernamePasswordAuthenticationToken(userVO, 
+							null,
+							userVO.getAuthorities());
 		
 	}
 

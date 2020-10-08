@@ -6,15 +6,52 @@
 <mapper namespace="com.biz.book.mapper.AuthorityDao">
 
 	<select id="selectAll" resultType="Authority">
-		SELECT * FROM tbl_authority
+		SELECT seq, m_userid AS username, m_role AS authority
+		FROM tbl_autority
 	</select>
 	
 	<select id="findById" resultType="Authority">
-		SELECT * FROM tbl_authority WHERE seq = #{seq}
+		SELECT seq, m_userid AS username, m_role AS authority 
+		FROM tbl_authority WHERE seq = #{seq}
+	</select>
+	
+	<select id="findByUserName" resultType="Authority">
+		SELECT seq, m_userid AS username, m_role AS authority 
+		FROM tbl_authority WHERE m_userid = #{username}
 	</select>
 	
 	<insert id="insert">
+		INSERT INTO tbl_authority 
+			(SEQ,m_userid, m_role) 
+		VALUES 
+			(SEQ_AUTHORITY.NEXTVAL, #{username}, #{authority}) 
 	</insert>
+	
+	<!-- oracle과 mybatis 연동했을때 seq PK 없는 table에 다중 insert 수행하는 코드 -->
+	<insert id="insertAll_1" parameterType="Authority">
+		<foreach collection="list" 
+					item="vo" 
+					open="INSERT ALL" 
+					close="SELECT * FROM DUAL" 
+					separator=" ">
+		 	INTO tbl_authority (m_userid, m_role)
+			VALUES (#{vo.username}, #{vo.authority}) 
+		</foreach>
+	</insert>
+	<!-- oracle과 mybatis 연동했을때 seq PK 있는 table에 다중 insert를 수행하는 코드 -->
+	<insert id="insertAll" parameterType="Authority">
+
+		INSERT INTO tbl_authority (seq,m_userid,m_role)
+		SELECT SEQ_AUTHORITY.NEXTVAL, SUB.* FROM (		
+			<foreach collection="list" 
+						item="vo" separator="UNION ALL">
+				SELECT #{vo.username}, #{vo.authority} FROM DUAL
+			</foreach>
+		) SUB
+		
+	</insert>
+	
+	
 	<update id="update"></update>
 	<delete id="delete"></delete>
 

@@ -87,7 +87,6 @@
 </style>
 <Script>
 	$(function(){
-	
 		$("button#btn-update").click(function(){
 			let seq = $(this).data("seq")
 			document.location.href="${rootPath}/books/update/" + seq
@@ -99,7 +98,6 @@
 			}
 		})
 	})
-	
 </Script>
 
 <table id="book-detail">

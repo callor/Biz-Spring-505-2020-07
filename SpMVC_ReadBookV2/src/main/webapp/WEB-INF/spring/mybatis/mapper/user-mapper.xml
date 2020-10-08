@@ -8,6 +8,8 @@
 	<select id="selectAll" resultType="UserDetail">
 		SELECT * FROM tbl_member
 	</select>
+	
+	
 	<!-- tbl_member table의 사용자id와 비밀번호 칼럼의 이름과 -->
 	<!-- UserDetailsVO의 필드변수 이름이 다른 관계로 -->
 	<!-- SELECT 후에 자동으로 VO에 Setting이 안된다. -->

@@ -52,7 +52,6 @@ public class BooksController {
 		return bookVO;
 	}
 	
-	
 	/*
 	 * SqlSessionTemplate 대신 
 	 * DataSourceTransactionManager 이것을 mybatis-context.xml 에 만들어주고
@@ -77,6 +76,8 @@ public class BooksController {
 	
 	@RequestMapping(value="/input",method=RequestMethod.GET)
 	public String input(@ModelAttribute("bookVO") BookVO bookVO, Model model) {
+		
+		bookVO = new BookVO();
 		
 		model.addAttribute("BODY","BOOK-WRITE");
 		model.addAttribute("bookVO",bookVO);

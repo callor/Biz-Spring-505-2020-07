@@ -19,7 +19,7 @@ import lombok.ToString;
 public class AuthorityVO {
 
 	private long seq;
-	private String m_userid;
-	private String m_role;
+	private String username;
+	private String authority;
 	
 }
