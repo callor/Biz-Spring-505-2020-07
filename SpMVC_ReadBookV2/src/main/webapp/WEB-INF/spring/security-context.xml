@@ -53,6 +53,7 @@
 	
 		<security:csrf disabled="false"/>
 		<security:form-login
+				login-page="/member/login"
 				username-parameter="username" 
 				password-parameter="password"/>
 		<security:logout logout-url="/logout" 

@@ -36,7 +36,7 @@ $(function () {
       // localhost:8080/book/login
       // spring security에서 자체 지원되는 login form을
       // 사용하기 위해서
-      document.location.href = `${rootPath}/login`;
+      document.location.href = `${rootPath}/member/login`;
     } else if (menu_id === "menu-logout") {
       $.ajax({
         url: `${rootPath}/logout`, // book/logout

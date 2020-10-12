@@ -64,9 +64,13 @@
     	<c:when test="${BODY == 'BOOK-DETAIL'}">
     		<%@ include file="/WEB-INF/views/books/book-detail.jsp" %>
     	</c:when>
+    	<c:when test="${BODY == 'MEMBER-LOGIN' }">
+    		<%@ include file="/WEB-INF/views/member/member-login.jsp" %>
+    	</c:when>
     	<c:when test="${BODY == 'MEMBER-JOIN' }">
     		<%@ include file="/WEB-INF/views/member/member-write.jsp" %>
     	</c:when>
+
     	<c:when test="${BODY == 'MEMBER-JOIN-NEXT' }">
     		<%@ include file="/WEB-INF/views/member/member-write2.jsp" %>
     	</c:when>

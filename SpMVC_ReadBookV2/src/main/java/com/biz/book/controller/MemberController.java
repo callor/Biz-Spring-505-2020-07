@@ -38,6 +38,15 @@ public class MemberController {
 
 	private final MemberService memberService;
 	
+	@RequestMapping(value="/login",method=RequestMethod.GET)
+	public String login(@ModelAttribute("memberVO") UserDetailsVO userVO, Model model) {
+		
+		
+		model.addAttribute("BODY","MEMBER-LOGIN");
+		return "home";
+	}
+	
+	
 	/*
 	 * @SessionAttributes("memberVO") 를 사용하려면
 	 * 반드시 memberVO를 생성하는 method가 클래스에 있어야 된다.
