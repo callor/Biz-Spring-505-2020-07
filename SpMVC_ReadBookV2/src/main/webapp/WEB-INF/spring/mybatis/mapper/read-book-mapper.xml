@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.biz.book.mapper.ReadBookDao">
+
+	<select id="selectAll" resultType="ReadBook">
+		SELECT * FROM tbl_readbook
+	</select>
+	
+	<insert id="insert" parameterType="ReadBook">
+			INSERT INTO tbl_readbook (
+				r_seq,
+				r_book_seq,
+				r_date,
+				r_stime,
+				r_etime,
+				r_comment
+			) VALUES (
+				seq_readbook.NEXTVAL,
+				#{r_book_seq},
+				#{r_date},
+				#{r_stime},
+				#{r_etime},
+				#{r_comment}
+			)
+	</insert>
+	
+	<update id="update" parameterType="ReadBook">
+	</update>
+
+</mapper> 
