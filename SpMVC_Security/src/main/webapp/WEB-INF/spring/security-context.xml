@@ -10,14 +10,15 @@
 	<sec:http>
 		<sec:intercept-url pattern="/login" access="permitAll"/>
 		<sec:intercept-url pattern="/admin" access="isAuthenticated()"/>
+		<sec:intercept-url pattern="/user/login" access="permitAll()"/>
+		<sec:intercept-url pattern="/user/join" access="permitAll()"/>
+		<sec:intercept-url pattern="/user/**" access="isAuthenticated()"/>
 		<sec:form-login/>
 		<sec:logout/>
 	</sec:http>
+	
+	<bean id="authProvider" class="com.biz.sec.auth.AuthProviderImpl"/>
 	<sec:authentication-manager>
-		<sec:authentication-provider>
-			<sec:user-service>
-				<sec:user name="admin" password="{noop}1234" authorities="ROLE_ADMIN"/>
-			</sec:user-service>		
-		</sec:authentication-provider>
+		<sec:authentication-provider ref="authProvider"  />
 	</sec:authentication-manager>
 </beans>

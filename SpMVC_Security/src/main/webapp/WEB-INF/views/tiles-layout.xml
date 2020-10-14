@@ -3,3 +3,32 @@
   "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
   "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
+<tiles-definitions>
+	
+	<definition name="default" template="/WEB-INF/views/layout.jsp">
+		<put-attribute name="header"  value="/WEB-INF/views/layout/header.jsp"/>
+		<put-attribute name="menu"  value="/WEB-INF/views/layout/menu.jsp"/>
+		<put-attribute name="content"  value="/"/>
+		<put-attribute name="footer"  value="/WEB-INF/views/layout/footer.jsp"/>	
+	</definition>
+
+	<definition name="home" extends="default">
+		<put-attribute name="content" value="/WEB-INF/views/layout/content.jsp"/>
+	</definition>
+
+	<definition name="user/*" extends="default">
+		<put-attribute name="content"  value="/WEB-INF/views/users/{1}.jsp"/>
+	</definition>
+	
+	<definition name="join" extends="default">
+		<put-attribute name="content"  value="/WEB-INF/views/users/join.jsp"/>
+	</definition>
+	<definition name="login" extends="default">
+		<put-attribute name="content"  value="/WEB-INF/views/users/login.jsp"/>
+	</definition>
+	<definition name="mypage" extends="default">
+		<put-attribute name="content"  value="/WEB-INF/views/users/mypage.jsp"/>
+	</definition>
+</tiles-definitions>
+
+
