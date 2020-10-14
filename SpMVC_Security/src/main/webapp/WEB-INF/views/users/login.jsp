@@ -89,12 +89,28 @@ to {
 	opacity: 1;
 }
 }
+
+h4#login-fail {
+	margin:5px auto;
+	background-color: red;
+	color:yellow;
+	border-radius: 15px;
+	padding:8px;
+}
+
 </style>
 <section id="login_body">
-	<form action="${rootPath}/login">
+	<form method="POST" action="${rootPath}/login">
 		<h2>로그인</h2>
-
-		<input path="username" placeholder="사용자 ID" /> <input path="password" type="password" placeholder="비밀번호" />
+		
+		<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+			<h4 id="login-fail">${SPRING_SECURITY_LAST_EXCEPTION.message}</h4>
+			<c:remove var="SPRING_SECURITY_LAST_EXCEPTION" scope="session"/>
+		</c:if>
+		
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+		<input name="username" placeholder="사용자 ID" /> 
+		<input name="password" type="password" placeholder="비밀번호" />
 		<button>로그인</button>
 		<button type="button">회원가입</button>
 	</form>

@@ -7,7 +7,6 @@
 */%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
-
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <script>
 	
@@ -19,17 +18,18 @@
 	window.addEventListener("load",function(){
 		
 		document
-			.querySelector("#menu-join")
+			.querySelector("#menu-home")
 			.addEventListener("click",function(){
-			// alert("회원가입")
-			document.location.href = "${rootPath}/user/join"
+			document.location.href = "${rootPath}/"
 		})
-		
-		
+		document
+			.querySelector("#menu-center")
+			.addEventListener("click",function(){
+			document.location.href = "${rootPath}/admin"
+		})
 		document
 			.querySelector("#menu-join")
 			.addEventListener("click",function(){
-			// alert("회원가입")
 			document.location.href = "${rootPath}/user/join"
 		})
 		document
@@ -42,14 +42,13 @@
 			.addEventListener("click",function(){
 			document.location.href = "${rootPath}/user/mypage"
 		})
-
-	
 	})
 </script>       
 <nav id="main-nav">
 	<ul>
 		<li id="menu-home">Home</li>
-		<li>Center</li>
+		<li id="menu-center">Center</li>
+		
 		<%/*
 			isAnonymous()
 			현재 화면에서 로그인한 세션정보를 찾을 수 없으면
