@@ -17,9 +17,19 @@
 	<!-- 일반적으로 bean 객체를 생성하여 주입하는 방식으로 설정이 안되고 -->
 	<!-- 클래스의 이름을  value 값으로 지정을 해줘야 한다 -->	
 	<!-- value값에 클래스 이름이 자동완성이 안된다. -->
+	<!-- order 속성을 1로 설정 -->
+	<!-- 현재 프로젝트에서 view와 관련된 클래스가 2개 선언된다 -->
+	<!-- servlet-context.xml internalResouceView -->
+	<!-- UrlBaseViewResolver -->
+	<!-- Controller에서 문자열을 return 했을때 어떤 view가 우선적으로 작동되어 -->
+	<!-- 사용자에게 response를 할것인지 지정해주기 위해서 -->
+	<!-- order 속성을 지정한다. 우선적으로 tiles view가 rendering 되도록 하기위해서 -->
+	<!-- servlet-context.xml view의 order를 2로 설정하고 -->
+	<!-- UrlBaseView의 order를 1로 설정한다. -->
 	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass" 
 				value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+		<property name="order" value="1"/>
 	</bean>
 
 </beans>
