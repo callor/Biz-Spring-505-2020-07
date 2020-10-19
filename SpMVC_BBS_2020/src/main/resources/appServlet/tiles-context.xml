@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+
+	<!-- xml 파일에 layout을 설정하고 그 설정값으로 view를 만드는 용도의 클래스 -->
+	<bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>classpath:/**/appServlet/tiles-layout.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- spring UrlBaseViewResolver를 사용하여 tiles layout을 rendering 하는 설정 -->
+	<!-- 일반적으로 bean 객체를 생성하여 주입하는 방식으로 설정이 안되고 -->
+	<!-- 클래스의 이름을  value 값으로 지정을 해줘야 한다 -->	
+	<!-- value값에 클래스 이름이 자동완성이 안된다. -->
+	<bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass" 
+				value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+	</bean>
+
+</beans>
