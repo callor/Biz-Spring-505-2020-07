@@ -10,6 +10,8 @@ public interface BBsService {
 
 	public void insert(BBsVO bbsVO);
 
+	public BBsVO findBySeq(long long_seq);
+
 	
 	
 }

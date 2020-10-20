@@ -20,7 +20,7 @@ public class FileServiceImplV3 extends FileServiceImplV1 {
 	@Override
 	public String fileUp(MultipartFile file) {
 		
-		String rootFolder = "C:/bizwork/workspace/upload";
+		String rootFolder = "c:/bizwork/workspace/upload";
 		File dir = new File(rootFolder);
 		
 		// file을 upload할 폴더를 검사하여 없으면 새로 생성해달라

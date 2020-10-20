@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,7 +30,7 @@ public class BbsController {
 	private BBsService bbsService;
 	
 	@Autowired
-	@Qualifier("fileServiceV3")
+	@Qualifier("fileServiceV4")
 	private FileService fileService;
 
 	/*
@@ -68,17 +69,24 @@ public class BbsController {
 			@RequestParam("file") MultipartFile file) {
 		
 		log.debug("업로드한 파일 이름" + file.getOriginalFilename());
-		fileService.fileUp(file);
 		
-		// bbsService.insert(bbsVO);
+		String fileName = fileService.fileUp(file);
+		bbsVO.setB_file(fileName);
+		bbsService.insert(bbsVO);
+		
 		return "redirect:/bbs/list";
 	
 	}
 	
 	
-	@RequestMapping(value="/detail",method=RequestMethod.GET)
-	public String detail() {
-		return "bbs/detail";
+	@RequestMapping(value="/detail/{seq}",method=RequestMethod.GET)
+	public String detail(@PathVariable("seq") String seq,Model model) {
+		
+		long long_seq = Long.valueOf(seq);
+		BBsVO bbsVO = bbsService.findBySeq(long_seq);
+		
+		model.addAttribute("BBSVO",bbsVO);
+		return "/bbs/detail";
 	}
 	
 	
