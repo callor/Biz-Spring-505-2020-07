@@ -11,10 +11,17 @@
   			<put-attribute name="footer"  value="/WEB-INF/views/layout/footer.jsp"/>
   		</definition>
   		
-  		<definition name="bbs/*" extends="home">
+  		<definition name="/*/*" extends="home">
   			<put-attribute name="content"  
-  					value="/WEB-INF/views/bbs/{1}.jsp"/>
+  					value="/WEB-INF/views/{1}/{2}.jsp"/>
   		</definition>
+
+  		<definition name="bbs/*/*" extends="home">
+  			<put-attribute name="content"  
+  					value="/WEB-INF/views/bbs/{1}/{2}.jsp"/>
+  		</definition>
+
+
   		
   		
   </tiles-definitions>

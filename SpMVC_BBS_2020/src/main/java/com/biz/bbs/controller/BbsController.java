@@ -2,24 +2,35 @@ package com.biz.bbs.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.biz.bbs.model.BBsVO;
 import com.biz.bbs.service.BBsService;
+import com.biz.bbs.service.FileService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
-@RequiredArgsConstructor
+@Slf4j
+
 @Controller
 @RequestMapping(value="/bbs")
 public class BbsController {
 	
+	@Autowired
 	@Qualifier("bbsServiceV1")
-	private final BBsService bbsService;
+	private BBsService bbsService;
+	
+	@Autowired
+	@Qualifier("fileServiceV3")
+	private FileService fileService;
 
 	/*
 	 * return문에 bbs/list 문자열이 있으면
@@ -38,18 +49,28 @@ public class BbsController {
 		List<BBsVO> bbsList = bbsService.selectAll();
 		
 		model.addAttribute("BBS_LIST",bbsList);
-		return "bbs/list";
+		return "/bbs/list";
 	
 	}
 	@RequestMapping(value="/write",method=RequestMethod.GET)
 	public String write() {
-		return "bbs/write";
+		return "/bbs/write";
 	}
 	
+	/*
+	 * form에서 보낸 파일받기
+	 * MultipartFile 클래스를 매개변수로 설정하여 파일을 받기
+	 * 이 클래스에 @RequestParam(이름) : 이름 = form에서 input type=file로 설정된
+	 * 		tag의 name값
+	 */
 	@RequestMapping(value="/write",method=RequestMethod.POST)
-	public String write(BBsVO bbsVO) {
+	public String write(BBsVO bbsVO, 
+			@RequestParam("file") MultipartFile file) {
 		
-		bbsService.insert(bbsVO);
+		log.debug("업로드한 파일 이름" + file.getOriginalFilename());
+		fileService.fileUp(file);
+		
+		// bbsService.insert(bbsVO);
 		return "redirect:/bbs/list";
 	
 	}
