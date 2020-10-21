@@ -89,8 +89,29 @@ document.addEventListener("DOMContentLoaded", function() {
 		let url = "${rootPath}/bbs/${BBSVO.b_seq}/"
 		if(e.target.tagName === ("BUTTON")) {
 			
+			/*
+			게시글 삭제를 요청하면(삭제버튼 클릭)
+			ajax 사용하여 서버에 DELETE method type으로 삭제를 요청하자
+			*/
 			if(e.target.className == "delete") {
-				if( !confirm("정말 삭제할까요?") ) {
+				if(confirm("정말 삭제할까요?")) {
+					// JSON 객체데이터를 문자열화 하여 HTTP Body 담기
+					let data = { seq : "${BBSVO.b_seq}" }
+					fetch( "${rootPath}/api/bbs",
+							{  
+								method : "DELETE",
+								headers : {
+									"Content-Type" : "application/json"
+								},
+								body: JSON.stringify(data)
+							}
+					)
+					.then(function(result){
+						alert(result)
+					})
+					.catch(function(error){
+						alert("실패")
+					})
 					return false;
 				}
 			}
