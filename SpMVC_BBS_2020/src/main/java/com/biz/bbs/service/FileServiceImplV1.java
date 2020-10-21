@@ -60,11 +60,13 @@ public class FileServiceImplV1 implements FileService{
 			e.printStackTrace();
 		}
 		
-		
-		
-		
-		
 		return null;
+	}
+
+	@Override
+	public boolean fileDelete(String b_file) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 	
 	
