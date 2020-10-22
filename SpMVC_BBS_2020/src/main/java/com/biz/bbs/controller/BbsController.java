@@ -14,9 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.biz.bbs.model.BBsVO;
 import com.biz.bbs.service.BBsService;
-import com.biz.bbs.service.FileService;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -50,10 +48,16 @@ public class BbsController {
 		return "/bbs/list";
 	
 	}
+
+	@RequestMapping(value="/notice",method=RequestMethod.GET)
+	public String notice(Model model) {
+		return "/bbs/write";
+	}
+
 	
 	
 	@RequestMapping(value="/write",method=RequestMethod.GET)
-	public String write() {
+	public String write(Model model) {
 		return "/bbs/write";
 	}
 	
