@@ -96,10 +96,14 @@ document.addEventListener("DOMContentLoaded", function() {
 			if(e.target.className == "delete") {
 				if(confirm("정말 삭제할까요?")) {
 					// JSON 객체데이터를 문자열화 하여 HTTP Body 담기
-					let data = { seq : "${BBSVO.b_seq}" }
+					let data = { 
+							seq : "${BBSVO.b_seq}",
+							subject : "${BBSVO.b_subject}"
+							
+					}
 					fetch( "${rootPath}/api/bbs",
 							{  
-								method : "DELETE",
+								method : "PUT",
 								headers : {
 									"Content-Type" : "application/json"
 								},

@@ -127,10 +127,6 @@
 			<version>2.11.3</version>
 		</dependency>
 
-
-
-
-
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
