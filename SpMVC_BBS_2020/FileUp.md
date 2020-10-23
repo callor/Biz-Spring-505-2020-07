@@ -29,6 +29,12 @@
 * 파일이 첨부가 되면 : 기존의 파일을 삭제하고, 새로운 파일을 upload 하고, 새로 업로드된 파일이름을 다시 file명 필드에 저장한 후 Update를 수행해야 한다.
 * 파일이 첨부가 안되었으면 : 기존의 file명 필드에 저장된 값이 변경되지 않도록 하면서 update를 수행
 
+## 다중파일 업로드 CRUD 구현
+1. 다중파일을 업로드 하고
+2. 파일의 원래이름과 업로드된 파일이름정보를 List로 생성
+3. bbs table에 데이터를 insert 하고
+4. bbs table로 부터 새로생성된 seq값을 가져오고
+5. file table에 파일 list를 insert하는데 이때 i_b_seq 칼럼에 bbs의 seq값을 같이 첨부하여 insert 한다.
 
 
 

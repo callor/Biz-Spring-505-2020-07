@@ -61,12 +61,31 @@
 	*/
 </script>
 <style>
+	table,div#button-box {
+		width:80% !important;
+		margin:10px auto;
+		text-align: right;
+	}
 	td.bbs-tr {
 		cursor: pointer;
 	}
 	
 	td.bbs-tr:hover {
 		background-color: #ccc;
+	}
+	
+	#button-box button {
+		color:white;
+		background-color: blue;
+		border:none;
+		outline: none;
+		padding:10px 16px;
+		border-radius: 5px;
+		
+	}
+	
+	button:hover {
+		box-shadow: 2px 2px 2px rgba(0,0,0,0.3)
 	}
 
 </style>
@@ -100,6 +119,8 @@
 		</c:forEach>
 	</tbody>
 </table>
-<button id="bbs-write">글쓰기</button>
+<div id="button-box">
+	<button id="bbs-write">글쓰기</button>
+</div>
 
 

@@ -1,6 +1,6 @@
 package com.biz.bbs.model;
 
-import java.io.Serializable;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,12 +13,8 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class BBsVO implements Serializable{
+public class BBsVO{
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private long b_seq;
 	private String b_date;
 	private String b_time;
@@ -28,5 +24,9 @@ public class BBsVO implements Serializable{
 	private int b_count;
 	private String b_file;
 
+	private List<ImageVO> images;
+	
+	
+	
 	
 }
