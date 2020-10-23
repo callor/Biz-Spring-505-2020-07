@@ -53,8 +53,6 @@ public class BbsController {
 	public String notice(Model model) {
 		return "/bbs/write";
 	}
-
-	
 	
 	@RequestMapping(value="/write",method=RequestMethod.GET)
 	public String write(Model model) {
@@ -72,7 +70,6 @@ public class BbsController {
 			@RequestParam("file") MultipartFile file) {
 		
 		log.debug("업로드한 파일 이름" + file.getOriginalFilename());
-		
 		bbsService.insert(bbsVO,file);
 		return "redirect:/bbs/list";
 	

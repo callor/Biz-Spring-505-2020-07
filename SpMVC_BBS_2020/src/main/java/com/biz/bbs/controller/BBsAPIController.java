@@ -5,17 +5,19 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.biz.bbs.model.BBsVO;
 import com.biz.bbs.service.BBsService;
+import com.biz.bbs.service.FileService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +31,11 @@ public class BBsAPIController {
 	@Autowired
 	@Qualifier("bbsServiceV1")
 	private BBsService bbsService;
+	
+	
+	@Autowired
+	@Qualifier("fileServiceV4")
+	private FileService fileService;
 	
 	// http://127.0.0.1:5500 에서 api요청이 오면, CORS Policy를 무시하고
 	// 응답하라
@@ -59,21 +66,26 @@ public class BBsAPIController {
 	// form의 input tag에 지정 name값과 같은 구조를 가진 VO를 매개변수로 설정하면
 	// 자동으로 @ModelAttribute를 지정한것과 똑같은 효과를 낸다.
 	@RequestMapping(value="/bbs",method = RequestMethod.POST)
-	public String bbs_insert(@ModelAttribute BBsVO bbsVO) {
+	public String bbs_insert(
+			@ModelAttribute BBsVO bbsVO,
+			@RequestParam("file") MultipartFile file) {
 
 		log.debug("POST RequestMethod Type으로 요청된 메소드");
 		log.debug("BBSVO {}", bbsVO.toString());
+		log.debug("업로드한 파일정보 {}",file.getOriginalFilename());
+		
 
 		return "bbs_insert";
 	}
 	// form에 데이터를 입력하고 submit을 수행하면 데이터를 update하라
 	@RequestMapping(value="/bbs",method=RequestMethod.PUT)
-	public String bbs_update(@ModelAttribute BBsVO bbsVO,String data) {
+	public String bbs_update(
+			@ModelAttribute BBsVO bbsVO,
+			@RequestParam("file") MultipartFile file) {
 		
-		
-		log.debug(data);
 		log.debug("PUT RequestMehtod Type으로 요청된 메소드");
 		log.debug("수신한 데이터 {}", bbsVO.toString());
+		log.debug("수신한 파일정보 {}", file.getOriginalFilename());
 		return "bbs_update";
 		
 	}
@@ -99,6 +111,13 @@ public class BBsAPIController {
 		log.debug("DELETE RequestMethod Type으로 요청된 메소드");
 		log.debug("시퀀스값 {}", data.get("seq").toString());
 		return "bbs_delete";
+	}
+	
+	
+	@RequestMapping(value="/file",method=RequestMethod.POST)
+	public String file_up(@RequestParam("file") MultipartFile file) {
+		String ret_file = fileService.fileUp(file);
+		return ret_file;
 	}
 	
 
