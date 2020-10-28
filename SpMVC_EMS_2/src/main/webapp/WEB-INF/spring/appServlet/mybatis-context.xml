@@ -17,12 +17,19 @@
 	</bean>
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="oracle_ds"/>
-		<property name="typeAliasesPackage"/>
+		<property name="mapperLocations" value="/WEB-INF/spring/mapper/*-mapper.xml"/>
+		<property name="typeAliasesPackage" value="com.biz.ems.model"/>
+		<property name="configuration">
+			<bean class="org.apache.ibatis.session.Configuration">
+				<property name="jdbcTypeForNull" value="VARCHAR"/>
+			</bean>
+		</property>
 	</bean>
 	
+	<tx:annotation-driven/>
 	<bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="oracle_ds"/>
 	</bean>
-	<mybatis-spring:scan base-package="com.biz.ems.model"/>
+	<mybatis-spring:scan base-package="com.biz.ems.mapper"/>
 
 </beans>
