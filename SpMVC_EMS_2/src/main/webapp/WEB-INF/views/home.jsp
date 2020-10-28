@@ -30,6 +30,7 @@
 		<th>발송일자</th>
 		<th>발송시각</th>
 		<th>제목</th>
+		<th>삭제</th>
 	</tr>
 	<c:if test="${empty EMS_LIST}">
 		<tr><td colspan="5">데이터가 없습니다</td></tr>
@@ -40,7 +41,14 @@
 			<td>${ems.to_email}</td>
 			<td>${ems.s_date}</td>
 			<td>${ems.s_time}</td>
-			<td>${ems.s_subject}</td>
+			<td>
+			<a href="${rootPath}/update?id=${ems.id}">
+			${ems.s_subject}
+			</a>
+			</td>
+			<td>
+			<a href="${rootPath}/delete?id=${ems.id}">삭제</a>
+			</td>
 		</tr>
 	</c:forEach>
 </table>

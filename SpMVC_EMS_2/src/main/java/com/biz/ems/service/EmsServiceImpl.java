@@ -22,8 +22,9 @@ public class EmsServiceImpl implements EmsService {
 
 	@Override
 	public EmsVO findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		EmsVO emsVO = emsDao.findById(id);
+		return emsVO;
 	}
 
 	@Override
@@ -36,14 +37,16 @@ public class EmsServiceImpl implements EmsService {
 
 	@Override
 	public int update(EmsVO emsVO) {
-		// TODO Auto-generated method stub
-		return 0;
+		return emsDao.update(emsVO);
 	}
 
 	@Override
 	public int delete(Long id) {
-		// TODO Auto-generated method stub
-		return 0;
+		int ret = emsDao.delete(id);
+		return ret;
 	}
 
 }
+
+
+

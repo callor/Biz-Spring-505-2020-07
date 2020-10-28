@@ -28,4 +28,18 @@
 			#{s_file2}
 		)
  	</insert>
+ 	<update id="update">
+	 	UPDATE tbl_ems SET
+			from_email 	=	#{from_email},
+			to_email 	=	#{to_email},
+			s_date 		=	#{s_date},
+			s_time 		=	#{s_time},
+			s_subject 	=	#{s_subject},
+			s_content 	=	#{s_content},
+			s_file1 	=	#{s_file1},
+			s_file2 	=	#{s_file2}
+		WHERE id 		=	#{id}
+ 	</update>
+ 	
+ 	
  </mapper>
