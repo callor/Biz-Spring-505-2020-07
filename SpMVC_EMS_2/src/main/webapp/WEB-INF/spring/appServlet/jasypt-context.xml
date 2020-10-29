@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 환경변수에서 saltPass 추출해서 StandardPBE...--> 
+	<!-- 에게 알고리즘, saltPass 주입하는 용도의 클래스-->
+	<bean id="envConfig" class="org.jasypt.encryption.pbe.config.EnvironmentStringPBEConfig">
+		<property name="algorithm" value="PBEWithMD5AndDES"/>
+		<property name="passwordEnvName" value="NAVER"/>
+	</bean>
+	
+	<!-- 암호문을 복호화할 클래스 -->
+	<bean id="pbeEnc" class="org.jasypt.encryption.pbe.StandardPBEStringEncryptor">
+		<property name="config" ref="envConfig"/>
+	</bean>
+	
+	<!-- *.properties 파일에서 암호화된 문자열을 읽어서 PBE에게 보내서  -->
+	<!-- 복호화를 한후 ${변수}로 설정된 곳에 주입 -->
+	<bean class="org.jasypt.spring31.properties.EncryptablePropertyPlaceholderConfigurer">
+		<constructor-arg ref="pbeEnc"/>
+		<property name="fileEncoding" value="UTF-8"/>
+		<property name="locations">
+			<list>
+				<value>/WEB-INF/spring/naver.sec.properties</value>
+			</list>
+		</property>
+	</bean>
+</beans>
