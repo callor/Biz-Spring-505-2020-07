@@ -43,9 +43,6 @@
 			</props>
 		</property>
 	</bean>
-	
-	
 	<jpa:repositories base-package="com.biz.book.repository"/>
-
 
 </beans>

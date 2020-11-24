@@ -1,0 +1,29 @@
+<th:block th:include="header"/>
+<body class="book-list" >
+    <table class="table">
+        <tr>
+            <th>No</th>
+            <th>도서명</th>
+            <th>저자</th>
+            <th>출판사</th>
+            <th>가격</th>
+        </tr>
+        <tr th:each="book : ${BOOKS}" th:object="${book}">
+            <td th:text="${bookStat.count}">No</td>
+            <td >
+            <a th:href="@{/book/view(id=${book.id})}" th:text="*{title}"/>
+                도서명
+            </a>
+            </td>
+            <td th:text="*{author}">저자</td>
+            <td th:text="*{comp}">출판사</td>
+            <td th:text="*{price}">가격</td>
+        </tr>
+    </table>
+    <th:block th:include="pagination"/>
+    <a th:href="@{/book/insert}">추가</a>
+</body>
+
+
+
+
