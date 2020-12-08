@@ -1,5 +1,6 @@
 package com.biz.data.service;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collections;
@@ -8,15 +9,18 @@ import java.util.List;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.client.ClientHttpRequestExecution;
+import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.biz.data.config.DataGoConfig;
-import com.biz.data.model.BisMain;
 import com.biz.data.model.BisStationData;
+import com.biz.data.model.BisStationList;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,8 +34,19 @@ public class BisServiceImplV1 {
 		
 		// 공공DB로부터 데이터를 수집하는 용도의 클래스
 		RestTemplate restTemp = new RestTemplate();
-		ResponseEntity<BisMain> resList = null;
+		ResponseEntity<BisStationList> resList = null;
 
+//		restTemp.getInterceptors().add(new ClientHttpRequestInterceptor() {
+//			
+//			@Override
+//			public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution)
+//					throws IOException {
+//	            ClientHttpResponse response = execution.execute(request,body);
+//	            response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+//	            return response;
+//			}
+//		});
+		
 		restTemp.getInterceptors().add((request, body, execution) -> {
             ClientHttpResponse response = execution.execute(request,body);
             response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
@@ -53,9 +68,9 @@ public class BisServiceImplV1 {
 
 			URI bisURI = new URI(apiURI);
 			resList = restTemp.exchange(bisURI, 
-					HttpMethod.GET, null, BisMain.class);
-			log.debug(resList.getBody().toString());
-			return resList.getBody().bis.STATION_LIST;
+					HttpMethod.GET, null, BisStationList.class);
+			log.debug(resList.getBody().STATION_LIST.toString());
+			return resList.getBody().STATION_LIST;
 
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
