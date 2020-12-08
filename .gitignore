@@ -142,3 +142,6 @@ RemoteSystemsTempFiles/
 
 # naver API Key
 NaverSecret.*
+
+# DataGo SERVICE Key
+DataGoConfig.*
