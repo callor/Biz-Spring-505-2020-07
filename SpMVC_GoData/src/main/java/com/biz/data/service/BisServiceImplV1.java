@@ -36,27 +36,10 @@ public class BisServiceImplV1 {
 		RestTemplate restTemp = new RestTemplate();
 		ResponseEntity<BisStationList> resList = null;
 
-//		restTemp.getInterceptors().add(new ClientHttpRequestInterceptor() {
-//			
-//			@Override
-//			public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution)
-//					throws IOException {
-//	            ClientHttpResponse response = execution.execute(request,body);
-//	            response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
-//	            return response;
-//			}
-//		});
-		
-		restTemp.getInterceptors().add((request, body, execution) -> {
-            ClientHttpResponse response = execution.execute(request,body);
-            response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
-            return response;
-        });
-		
 		String apiURI = DataGoConfig.BIS_URL;
 		apiURI += "?ServiceKey=" + DataGoConfig.SEVICE_KEY;
 
-		// springframework.http 패키지의 클래스
+// 		springframework.http 패키지의 클래스
 //		HttpHeaders headers = new HttpHeaders();
 //		headers.setAccept(Collections
 //				.singletonList(MediaType.APPLICATION_JSON));
