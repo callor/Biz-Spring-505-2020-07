@@ -66,4 +66,15 @@ public class BisController {
 		return "OK";
 		
 	}
+	@ResponseBody
+	@RequestMapping(value="/stopString",method=RequestMethod.POST)
+	public String busstopString(
+			@RequestBody Map<String,String> data) {
+		
+		log.debug("BUSSTOP " + data.get("station"));
+		return bService.busstopString(data.get("station"));
+		
+	}
+
+
 }

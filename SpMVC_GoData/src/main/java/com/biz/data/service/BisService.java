@@ -15,4 +15,6 @@ public interface BisService {
 
 	public List<BisDestVO> busstop(String string);
 
+	public String busstopString(String string);
+
 }

@@ -115,7 +115,7 @@ public class BisServiceImplV1 implements BisService{
 	public List<BisDestVO> busstop(String station) {
 
 		String queryString = DataGoConfig.BIS_DEST_URL;
-		queryString += "?serviceKey=" + DataGoConfig.SEVICE_KEY;
+		queryString += "?ServiceKey=" + DataGoConfig.SEVICE_KEY;
 		try {
 			queryString += "&BUSSTOP_ID=" + URLEncoder.encode(station,"UTF-8");
 		} catch (UnsupportedEncodingException e1) {
@@ -140,8 +140,46 @@ public class BisServiceImplV1 implements BisService{
 					null,
 					BisArriveList.class);
 			
-			log.debug(bisArrList.toString());
-			return bisArrList.getBody().BUSSTOP_LIST;
+			log.debug(bisArrList.getBody().RESULT.get("RESULT_CODE"));
+			log.debug(bisArrList.getBody().BUSSTOP_LIST.toString());
+			 return bisArrList.getBody().BUSSTOP_LIST;
+			
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	public String busstopString(String station) {
+
+		String queryString = DataGoConfig.BIS_DEST_URL;
+		queryString += "?ServiceKey=" + DataGoConfig.SEVICE_KEY;
+		try {
+			queryString += "&BUSSTOP_ID=" + URLEncoder.encode(station,"UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		RestTemplate restTemp = new RestTemplate();
+		ResponseEntity<String> bisArrList;
+		URI apiURI = null;
+		
+		restTemp.getInterceptors().add((request,body,execution)->{
+			ClientHttpResponse response = execution.execute(request, body);
+			response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+			return response;
+		});
+
+		try {
+			apiURI = new URI(queryString);
+			bisArrList = restTemp.exchange(
+					apiURI, HttpMethod.GET,
+					null,
+					String.class);
+			
+			log.debug(bisArrList.getBody().toString());
+			return bisArrList.getBody();
 			
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
