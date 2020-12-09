@@ -8,14 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<<<<<<< HEAD
 <link rel="styleSheet" href="${rootPath}/static/css/main.css?ver=2020-12-08"/>
-
-
-=======
-<link rel="stylesheet" 
-	href="${rootPath}/static/css/main.css?ver=2020-12-09-001"/>
->>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33
 <script>
 	document.addEventListener("DOMContentLoaded",function(){
 		const menu_station = document.querySelector("nav.main-nav .get-station")
@@ -50,10 +43,7 @@
 <nav class="main-nav">
 	<ul>
 		<li>Home</li>
-<<<<<<< HEAD
-		<li class="get-station">노선정보가져오기</li>
-=======
->>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33
+		
 		<li>
 			<form>
 				<select name="cat">
@@ -65,7 +55,6 @@
 					placeholder="동물병원 이름을 입력한 후 Enter">
 			</form>
 		</li>
-<<<<<<< HEAD
 		<li>
 			<form action="${rootPath}/bis/station">
 				<input name="station" 
@@ -73,38 +62,15 @@
 					placeholder="버스 정류소 이름을 입력한 후 Enter">
 			</form>
 		</li>
+		<li class="get-station">노선정보가져오기</li>
 		
 	</ul>
 </nav>
-<c:if test="${BODY == 'BIS'}">
+<c:if test="${BODY == 'STATION'}">
 	<%@ include file="/WEB-INF/views/station_view.jsp" %> 
 </c:if>
 <c:if test="${BODY == 'PET'}">
 	<%@ include file="/WEB-INF/views/hosp_view.jsp" %> 
 </c:if>
-
-
-
-=======
-
-		<li>
-			<form action="${rootPath}/bis/station">
-				<input name="station" 
-						placeholder="정류소 입력후 Enter...">
-			</form>
-		</li>
-		<li class="get-station">노선정보가져오기</li>
-	
-	</ul>
-</nav>
-<section>
-	<c:if test="${BODY == 'PET' }">
-		<%@ include file="/WEB-INF/views/pet_view.jsp"  %>
-	</c:if>
-	<c:if test="${BODY == 'STATION' }">
-		<%@ include file="/WEB-INF/views/station_view.jsp"  %>
-	</c:if>
-</section>
->>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33
 </body>
 </html>

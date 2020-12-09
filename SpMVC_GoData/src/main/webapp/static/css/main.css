@@ -1,8 +1,4 @@
 @charset "UTF-8";
-<<<<<<< HEAD
-=======
-
->>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33
 * {
 	box-sizing: border-box;
 	margin: 0;
@@ -21,20 +17,13 @@ nav.main-nav ul {
 	list-style: none;
 	background-color: blue;
 	color: white;
-<<<<<<< HEAD
 	align-items: center
-=======
->>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33
 }
 
 nav.main-nav li {
 	cursor: pointer;
-<<<<<<< HEAD
 	padding: 8px;
 	vertical-align: middle
-=======
-	padding: 0.5rem;
->>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33
 }
 
 nav.main-nav li:nth-child(2), nav.main-nav li:nth-child(3) {
@@ -46,7 +35,6 @@ nav.main-nav li:hover {
 	color: blue;
 }
 
-<<<<<<< HEAD
 nav.main-nav input {
 	padding:8px;
 	border-radius: 5px;
@@ -88,7 +76,6 @@ table.hosp-list td, table.hosp-list th {
 	vertical-align: top;
 	white-space: nowrap; /* table의 text를 줄바꿈하지 말라 */
 }
-=======
 nav.main-nav input,
 nav.main-nav select {
 	width:200px;
@@ -97,4 +84,3 @@ nav.main-nav select {
 }
 
 
->>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33
