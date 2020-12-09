@@ -2,7 +2,6 @@ package com.biz.data.config;
 
 import java.io.IOException;
 
-import org.springframework.core.NestedExceptionUtils;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.ClientHttpRequestExecution;

@@ -1,10 +1,7 @@
-package com.callor.data.service;
+package com.biz.data.service;
 
-<<<<<<< HEAD:SpMVC_GoData/src/main/java/com/callor/data/service/BisServiceImplV1.java
 import java.io.IOException;
-=======
 import java.io.UnsupportedEncodingException;
->>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33:SpMVC_GoData/src/main/java/com/biz/data/service/BisServiceImplV1.java
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
@@ -20,36 +17,23 @@ import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-<<<<<<< HEAD:SpMVC_GoData/src/main/java/com/callor/data/service/BisServiceImplV1.java
-import com.callor.data.config.DataGoConfig;
-import com.callor.data.model.BisStationData;
-import com.callor.data.model.BisStationList;
-=======
 import com.biz.data.config.DataGoConfig;
-import com.biz.data.model.BisArriveList;
-import com.biz.data.model.BisDestVO;
-import com.biz.data.model.BisStationData;
-import com.biz.data.model.BisStationList;
->>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33:SpMVC_GoData/src/main/java/com/biz/data/service/BisServiceImplV1.java
+import com.biz.data.config.model.BisArriveList;
+import com.biz.data.config.model.BisDestVO;
+import com.biz.data.config.model.BisStationData;
+import com.biz.data.config.model.BisStationList;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-<<<<<<< HEAD:SpMVC_GoData/src/main/java/com/callor/data/service/BisServiceImplV1.java
-public class BisServiceImplV1 implements BisService {
 
-=======
 public class BisServiceImplV1 implements BisService{
->>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33:SpMVC_GoData/src/main/java/com/biz/data/service/BisServiceImplV1.java
-	
 	public List<BisStationData> getStation() {
 		
 		// 공공DB로부터 데이터를 수집하는 용도의 클래스
 		RestTemplate restTemp = new RestTemplate();
 		ResponseEntity<BisStationList> resList = null;
-
-<<<<<<< HEAD:SpMVC_GoData/src/main/java/com/callor/data/service/BisServiceImplV1.java
 
 		restTemp.getInterceptors().add(new ClientHttpRequestInterceptor() {
 			@Override
@@ -66,8 +50,6 @@ public class BisServiceImplV1 implements BisService{
 //            return response;
 //        });
 		
-=======
->>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33:SpMVC_GoData/src/main/java/com/biz/data/service/BisServiceImplV1.java
 		String apiURI = DataGoConfig.BIS_URL;
 		apiURI += "?ServiceKey=" + DataGoConfig.SEVICE_KEY;
 		
@@ -108,16 +90,11 @@ public class BisServiceImplV1 implements BisService{
 
 			URI bisURI = new URI(apiURI);
 			resList = restTemp.exchange(bisURI, 
-<<<<<<< HEAD:SpMVC_GoData/src/main/java/com/callor/data/service/BisServiceImplV1.java
-					HttpMethod.GET, null, BisStationList.class);
-			log.debug(resList.getBody().toString());
-=======
 					HttpMethod.GET, 
 					null, 
 					BisStationList.class);
 			
 			// log.debug(resList.getBody().STATION_LIST.toString());
->>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33:SpMVC_GoData/src/main/java/com/biz/data/service/BisServiceImplV1.java
 			return resList.getBody().STATION_LIST;
 
 		} catch (URISyntaxException e) {

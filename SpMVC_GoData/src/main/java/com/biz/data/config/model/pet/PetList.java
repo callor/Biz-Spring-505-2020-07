@@ -1,4 +1,4 @@
-package com.callor.data.model.pet;
+package com.biz.data.config.model.pet;
 
 import java.util.List;
 

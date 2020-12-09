@@ -1,4 +1,4 @@
-package com.callor.data.controller;
+package com.biz.data.controller;
 
 import java.util.List;
 
@@ -8,13 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-<<<<<<< HEAD:SpMVC_GoData/src/main/java/com/callor/data/controller/PetController.java
-import com.callor.data.model.pet.GoPetVO;
-import com.callor.data.service.PetService;
-=======
-import com.biz.data.model.pet.GoPetVO;
+import com.biz.data.config.model.pet.GoPetVO;
 import com.biz.data.service.PetService;
->>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33:SpMVC_GoData/src/main/java/com/biz/data/controller/PetController.java
 
 @Controller
 @RequestMapping(value="/pet")

@@ -1,4 +1,4 @@
-package com.callor.data.service;
+package com.biz.data.service;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -15,19 +15,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.callor.data.config.DataGoConfig;
-import com.callor.data.model.pet.GoPetVO;
-import com.callor.data.model.pet.RfcOpenAPI;
+import com.biz.data.config.DataGoConfig;
+import com.biz.data.config.model.pet.GoPetVO;
+import com.biz.data.config.model.pet.RfcOpenAPI;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-<<<<<<< HEAD:SpMVC_GoData/src/main/java/com/callor/data/service/PetServiceImplV1.java
-public class PetServiceImplV1 implements PetService{
-=======
 public class PetServiceImplV1 implements PetService {
->>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33:SpMVC_GoData/src/main/java/com/biz/data/service/PetServiceImplV1.java
 
 	public List<GoPetVO> getHosp(String cat, String search) {
 		log.debug("{}, {}",cat,search);

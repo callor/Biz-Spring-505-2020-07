@@ -2,8 +2,8 @@ package com.biz.data.service;
 
 import java.util.List;
 
-import com.biz.data.model.BisDestVO;
-import com.biz.data.model.BisStationData;
+import com.biz.data.config.model.BisDestVO;
+import com.biz.data.config.model.BisStationData;
 
 public interface BisService {
 

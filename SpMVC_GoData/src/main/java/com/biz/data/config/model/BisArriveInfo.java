@@ -1,4 +1,4 @@
-package com.biz.data.model;
+package com.biz.data.config.model;
 
 import lombok.ToString;
 

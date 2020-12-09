@@ -41,13 +41,11 @@
 	})
 </script>		
 <article class="station">
->>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33
 	<table class="station-list">
 		<tr>
 			<th>정류소ID</th>
 			<th>정류소명</th>
 			<th>다음정류소</th>
-<<<<<<< HEAD
 		</tr>
 		<c:choose>
 			<c:when test="${empty ST_LIST}">
@@ -65,7 +63,6 @@
 		</c:choose>
 	</table>
 </section>
-=======
 		</tr>	
 		<c:forEach items="${ST_LIST}" var="st">
 			<tr data-id="${st.BUSSTOP_ID}" class="st_tr">
@@ -76,4 +73,3 @@
 		</c:forEach>
 	</table>
 </article>
->>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33
