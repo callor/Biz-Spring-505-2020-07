@@ -1,7 +1,5 @@
 package com.biz.data.model;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

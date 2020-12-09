@@ -1,0 +1,44 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+header {
+	padding: 2rem;
+	background-color: green;
+	text-align: center;
+	margin-bottom: 0px;
+}
+
+nav.main-nav ul {
+	display: flex;
+	list-style: none;
+	background-color: blue;
+	color: white;
+}
+
+nav.main-nav li {
+	cursor: pointer;
+	padding: 0.5rem;
+}
+
+nav.main-nav li:nth-child(2), nav.main-nav li:nth-child(3) {
+	margin-left: auto;
+}
+
+nav.main-nav li:hover {
+	background-color: gray;
+	color: blue;
+}
+
+nav.main-nav input,
+nav.main-nav select {
+	width:200px;
+	border-radius: 5px;
+	padding:5px;
+}
+
+

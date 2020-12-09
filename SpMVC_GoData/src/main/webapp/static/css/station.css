@@ -1,0 +1,42 @@
+@charset "UTF-8";
+article.station {
+	width:40%;
+	border:1px solid #ddd;
+	box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+
+table.station-list {
+	width: 90%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	border: 1px solid #ccc;
+}
+
+table.staion-list th {
+	text-align: left;
+}
+
+table.station-list tr:nth-child(even) {
+	background-color: #ccc;
+}
+table.station-list tr:nth-child(odd) {
+	background-color: #ddd;
+}
+
+table.station-list tr:nth-child(n+2):hover{
+	background-color: #aaa;
+	cursor: pointer;
+}
+
+table.station-list td,
+table.station-list th {
+	padding:8px;
+	vertical-align: top;
+	white-space: nowrap;
+}
+
+
+
+
+
+

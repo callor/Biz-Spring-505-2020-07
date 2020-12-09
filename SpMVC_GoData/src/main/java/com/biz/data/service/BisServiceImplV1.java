@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.biz.data.config.DataGoConfig;
+import com.biz.data.config.RestTempInterceptor;
 import com.biz.data.model.BisStationData;
 import com.biz.data.model.BisStationList;
 
@@ -26,11 +27,9 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class BisServiceImplV1 {
-
+public class BisServiceImplV1 implements BisService{
 	
 	public List<BisStationData> getStation() {
-
 		
 		// 공공DB로부터 데이터를 수집하는 용도의 클래스
 		RestTemplate restTemp = new RestTemplate();
@@ -38,21 +37,49 @@ public class BisServiceImplV1 {
 
 		String apiURI = DataGoConfig.BIS_URL;
 		apiURI += "?ServiceKey=" + DataGoConfig.SEVICE_KEY;
+		
 
-// 		springframework.http 패키지의 클래스
-//		HttpHeaders headers = new HttpHeaders();
-//		headers.setAccept(Collections
-//				.singletonList(MediaType.APPLICATION_JSON));
+// 		별도로 클래스를 만들어 interceptor를 설정하는 방법
+//		request,body, excution등을 주입해주어야 해서 매우 복잡하다		
+//		RestTempInterceptor rtInter = new RestTempInterceptor();
+//		restTemp.getInterceptors().add(
+//				rtInter.intercept(request, body, execution)
+//		)
+		
+		/**
+		 * ClientHttpRequestInterceptor interface를 사용하여
+		 * 익명클래스를 선언하기
+		 */
+//		restTemp.getInterceptors().add(new ClientHttpRequestInterceptor() {
+//			@Override
+//			public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution)
+//					throws IOException {
 //
-//		HttpEntity<String> entity 
-//			= new HttpEntity<String>("parameters",headers);
+//				ClientHttpResponse response = execution.execute(request, body);
+//				response
+//					.getHeaders()
+//					.setContentType(MediaType.APPLICATION_JSON);
+//				return response;
+//			}
+//		});
+		
+		// java Lambda 형식으로 구현한 Interceptor
+		// java Lambda 구현을 위해서는 Interface가 필수적으로 요구된다
+		restTemp.getInterceptors().add((request,body,execution)->{
+			ClientHttpResponse response = execution.execute(request, body);
+			response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+			return response;
+		});
 		
 		try {
 
 			URI bisURI = new URI(apiURI);
 			resList = restTemp.exchange(bisURI, 
-					HttpMethod.GET, null, BisStationList.class);
-			log.debug(resList.getBody().STATION_LIST.toString());
+					HttpMethod.GET, 
+					null, 
+					BisStationList.class);
+			
+			// log.debug(resList.getBody().STATION_LIST.toString());
 			return resList.getBody().STATION_LIST;
 
 		} catch (URISyntaxException e) {
@@ -66,23 +93,20 @@ public class BisServiceImplV1 {
 
 		// 공공DB로부터 데이터를 수집하는 용도의 클래스
 		RestTemplate restTemp = new RestTemplate();
-		ResponseEntity<String> resList = null;
+		ResponseEntity<String> resString = null;
 
 		String apiURI = DataGoConfig.BIS_URL;
 		apiURI += "?serviceKey=" + DataGoConfig.SEVICE_KEY;
-
-		HttpHeaders headers = new HttpHeaders();
-	    // headers.setContentType(MediaType.APPLICATION_JSON);
-	    headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-		HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
 		
 		try {
 			URI bisURI = new URI(apiURI);
-			resList = restTemp.exchange(bisURI, HttpMethod.GET, entity, String.class);
+			resString = restTemp.exchange(bisURI, 
+					HttpMethod.GET, 
+					null, 
+					String.class);
 
-			 log.debug(resList.getBody());
-			// return resList.getBody();
-			return resList.getBody();
+			 log.debug(resString.getBody());
+			 return resString.getBody();
 
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
