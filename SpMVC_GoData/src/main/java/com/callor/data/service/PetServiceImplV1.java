@@ -7,7 +7,6 @@ import java.net.URLEncoder;
 import java.util.Collections;
 import java.util.List;
 
-import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -24,19 +23,28 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
+<<<<<<< HEAD:SpMVC_GoData/src/main/java/com/callor/data/service/PetServiceImplV1.java
 public class PetServiceImplV1 implements PetService{
+=======
+public class PetServiceImplV1 implements PetService {
+>>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33:SpMVC_GoData/src/main/java/com/biz/data/service/PetServiceImplV1.java
 
-	public List<GoPetVO> getHosp(String hosp) {
-		
+	public List<GoPetVO> getHosp(String cat, String search) {
+		log.debug("{}, {}",cat,search);
 		String queryString = DataGoConfig.PET_URL;
 		queryString += "/getDongMulHospital";
 		queryString += "?ServiceKey=" + DataGoConfig.SEVICE_KEY;
 		queryString += "&pageNo=1";
 		queryString += "&numOfRows=100";
 		try {
-			if(!hosp.isEmpty()) {
-				queryString += "&dongName=" 
-						+ URLEncoder.encode(hosp,"UTF-8");
+			if(!search.isEmpty()) {
+				if(cat.equalsIgnoreCase("HOSP")) {
+					queryString += "&dongName=" 
+							+ URLEncoder.encode(search,"UTF-8");
+				} else {
+					queryString += "&address=" 
+							+ URLEncoder.encode(search,"UTF-8");
+				}
 			}
 		} catch (UnsupportedEncodingException e1) {
 			// TODO Auto-generated catch block
@@ -65,8 +73,8 @@ public class PetServiceImplV1 implements PetService{
 						RfcOpenAPI.class);
 			
 			List<GoPetVO> petList = result.getBody().body.data.list;
-			// log.debug(petList.toString());
-			 return petList;
+			return petList;
+
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

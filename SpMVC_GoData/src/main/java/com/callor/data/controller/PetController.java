@@ -8,8 +8,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+<<<<<<< HEAD:SpMVC_GoData/src/main/java/com/callor/data/controller/PetController.java
 import com.callor.data.model.pet.GoPetVO;
 import com.callor.data.service.PetService;
+=======
+import com.biz.data.model.pet.GoPetVO;
+import com.biz.data.service.PetService;
+>>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33:SpMVC_GoData/src/main/java/com/biz/data/controller/PetController.java
 
 @Controller
 @RequestMapping(value="/pet")
@@ -20,13 +25,17 @@ public class PetController {
 	
 	@RequestMapping(value="/getHosp")
 	public String getHospital(
-			@RequestParam(name="hosp",required = false,defaultValue = "") String hosp,Model model) {
+			@RequestParam(name="cat",
+				required = false, 
+				defaultValue = "hosp") String cat,
+			
+			@RequestParam(name="search",
+				required = false,
+				defaultValue = "") String search,Model model) {
 
-		List<GoPetVO> petList = petService.getHosp(hosp);
+		List<GoPetVO> petList = petService.getHosp(cat,search);
 		model.addAttribute("H_LIST",petList);
 		model.addAttribute("BODY","PET");
 		return "home";
 	}
-
-	
 }

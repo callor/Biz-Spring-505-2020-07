@@ -1,4 +1,8 @@
+<<<<<<< HEAD:SpMVC_GoData/src/main/java/com/callor/data/model/BisStationData.java
 package com.callor.data.model;
+=======
+package com.biz.data.model;
+>>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33:SpMVC_GoData/src/main/java/com/biz/data/model/BisStationData.java
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

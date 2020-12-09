@@ -1,4 +1,5 @@
 @charset "UTF-8";
+<<<<<<< HEAD
 
 table.station-list {
 	border-collapse: collapse;
@@ -14,11 +15,29 @@ table.station-list th {
 
 table.station-list tr {
 	border: 1px solid #ddd;
+=======
+article.station {
+	width:40%;
+	border:1px solid #ddd;
+	box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+}
+
+table.station-list {
+	width: 90%;
+	border-collapse: collapse;
+	border-spacing: 0;
+	border: 1px solid #ccc;
+}
+
+table.staion-list th {
+	text-align: left;
+>>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33
 }
 
 table.station-list tr:nth-child(even) {
 	background-color: #ccc;
 }
+<<<<<<< HEAD
 
 table.station-list tr:nth-child(odd) {
 	background-color: #fff;
@@ -34,3 +53,26 @@ table.station-list td, table.station-list th {
 	vertical-align: top;
 	white-space: nowrap; /* table의 text를 줄바꿈하지 말라 */
 }
+=======
+table.station-list tr:nth-child(odd) {
+	background-color: #ddd;
+}
+
+table.station-list tr:nth-child(n+2):hover{
+	background-color: #aaa;
+	cursor: pointer;
+}
+
+table.station-list td,
+table.station-list th {
+	padding:8px;
+	vertical-align: top;
+	white-space: nowrap;
+}
+
+
+
+
+
+
+>>>>>>> 097dbe2c03d4f463c1cda3baf7880b1f008e2a33

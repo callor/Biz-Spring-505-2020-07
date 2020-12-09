@@ -1,11 +1,9 @@
-package com.callor.data.service;
+package com.biz.data.service;
 
 import java.util.List;
 
-import com.callor.data.model.pet.GoPetVO;
+import com.biz.data.model.pet.GoPetVO;
 
 public interface PetService {
-
-	public List<GoPetVO> getHosp(String hosp) ;
-	
+	public List<GoPetVO> getHosp(String cat, String hosp);
 }
