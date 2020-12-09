@@ -1,4 +1,4 @@
-package com.biz.data.model;
+package com.callor.data.model;
 
 import java.util.List;
 import java.util.Map;

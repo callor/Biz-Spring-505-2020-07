@@ -1,4 +1,4 @@
-package com.biz.data.model.pet;
+package com.callor.data.model.pet;
 
 import javax.xml.bind.annotation.XmlRootElement;
 

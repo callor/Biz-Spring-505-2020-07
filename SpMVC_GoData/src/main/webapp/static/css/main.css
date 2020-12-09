@@ -1,0 +1,78 @@
+@charset "UTF-8";
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+header {
+	padding: 2rem;
+	background-color: green;
+	text-align: center;
+	margin-bottom: 0px;
+}
+
+nav.main-nav ul {
+	display: flex;
+	list-style: none;
+	background-color: blue;
+	color: white;
+	align-items: center
+}
+
+nav.main-nav li {
+	cursor: pointer;
+	padding: 8px;
+	vertical-align: middle
+}
+
+nav.main-nav li:nth-child(2), nav.main-nav li:nth-child(3) {
+	margin-left: auto;
+}
+
+nav.main-nav li:hover {
+	background-color: gray;
+	color: blue;
+}
+
+nav.main-nav input {
+	padding:8px;
+	border-radius: 5px;
+	display: line-block;
+	width:500px;
+}
+
+table.hosp-list {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 90%;
+	border: 1px solid #ccc;
+	margin: 20px auto;
+}
+
+table.hosp-list th {
+	text-align: left
+}
+
+table.hosp-list tr {
+	border: 1px solid #ddd;
+}
+
+table.hosp-list tr:nth-child(even) {
+	background-color: #ccc;
+}
+
+table.hosp-list tr:nth-child(odd) {
+	background-color: #fff;
+}
+
+table.hosp-list tr:hover {
+	background-color: #ddd;
+	cursor: pointer;
+}
+
+table.hosp-list td, table.hosp-list th {
+	padding: 8px;
+	vertical-align: top;
+	white-space: nowrap; /* table의 text를 줄바꿈하지 말라 */
+}

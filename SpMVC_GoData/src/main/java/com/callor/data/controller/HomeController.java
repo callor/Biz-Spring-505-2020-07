@@ -1,4 +1,4 @@
-package com.biz.data.controller;
+package com.callor.data.controller;
 
 import java.text.DateFormat;
 import java.util.Date;

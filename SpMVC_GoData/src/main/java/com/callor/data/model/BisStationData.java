@@ -1,6 +1,4 @@
-package com.biz.data.model;
-
-import javax.xml.bind.annotation.XmlRootElement;
+package com.callor.data.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

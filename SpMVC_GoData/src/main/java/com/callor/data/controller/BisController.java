@@ -1,15 +1,17 @@
-package com.biz.data.controller;
+package com.callor.data.controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.biz.data.model.BisStationData;
-import com.biz.data.service.BisServiceImplV1;
+import com.callor.data.model.BisStationData;
+import com.callor.data.service.BisService;
 
 @Controller
 @RequestMapping(value="/bis")
@@ -17,13 +19,22 @@ public class BisController {
 
 
 	@Autowired
-	private BisServiceImplV1 bService;
+	private BisService bService;
 	
-	@ResponseBody
+	
 	@RequestMapping(value="/station",method=RequestMethod.GET,
 	produces = "application/json;charset=UTF-8")
-	public List<BisStationData> station() {
-		 return bService.getStation();
+	public String station(String station,Model model) {
+		
+		List<BisStationData> bisList = bService.getStation();
+		
+				
+		 model.addAttribute("ST_LIST",bisList
+				 .stream()
+				 .filter(bis->bis.BUSSTOP_NAME.contains(station))
+				 .collect(Collectors.toList()));
+		 model.addAttribute("BODY","BIS");
+		 return "home";
 	}
 
 	@ResponseBody

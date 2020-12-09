@@ -1,4 +1,4 @@
-package com.biz.data.service;
+package com.callor.data.service;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -16,15 +16,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.biz.data.config.DataGoConfig;
-import com.biz.data.model.pet.GoPetVO;
-import com.biz.data.model.pet.RfcOpenAPI;
+import com.callor.data.config.DataGoConfig;
+import com.callor.data.model.pet.GoPetVO;
+import com.callor.data.model.pet.RfcOpenAPI;
 
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-public class PetServiceImplV1 {
+public class PetServiceImplV1 implements PetService{
 
 	public List<GoPetVO> getHosp(String hosp) {
 		

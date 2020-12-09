@@ -1,4 +1,4 @@
-package com.biz.data.controller;
+package com.callor.data.controller;
 
 import java.util.List;
 
@@ -8,15 +8,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.biz.data.model.pet.GoPetVO;
-import com.biz.data.service.PetServiceImplV1;
+import com.callor.data.model.pet.GoPetVO;
+import com.callor.data.service.PetService;
 
 @Controller
 @RequestMapping(value="/pet")
 public class PetController {
 
 	@Autowired
-	private PetServiceImplV1 petService;
+	private PetService petService;
 	
 	@RequestMapping(value="/getHosp")
 	public String getHospital(
@@ -24,6 +24,7 @@ public class PetController {
 
 		List<GoPetVO> petList = petService.getHosp(hosp);
 		model.addAttribute("H_LIST",petList);
+		model.addAttribute("BODY","PET");
 		return "home";
 	}
 
