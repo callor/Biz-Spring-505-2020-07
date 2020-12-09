@@ -1,25 +1,21 @@
 package com.biz.data.service;
 
-import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Collections;
+import java.net.URLEncoder;
 import java.util.List;
 
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.client.ClientHttpRequestExecution;
-import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.biz.data.config.DataGoConfig;
-import com.biz.data.config.RestTempInterceptor;
+import com.biz.data.model.BisArriveList;
+import com.biz.data.model.BisDestVO;
 import com.biz.data.model.BisStationData;
 import com.biz.data.model.BisStationList;
 
@@ -108,6 +104,45 @@ public class BisServiceImplV1 implements BisService{
 			 log.debug(resString.getBody());
 			 return resString.getBody();
 
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public List<BisDestVO> busstop(String station) {
+
+		String queryString = DataGoConfig.BIS_DEST_URL;
+		queryString += "?serviceKey=" + DataGoConfig.SEVICE_KEY;
+		try {
+			queryString += "&BUSSTOP_ID=" + URLEncoder.encode(station,"UTF-8");
+		} catch (UnsupportedEncodingException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		RestTemplate restTemp = new RestTemplate();
+		ResponseEntity<BisArriveList> bisArrList;
+		URI apiURI = null;
+		
+		restTemp.getInterceptors().add((request,body,execution)->{
+			ClientHttpResponse response = execution.execute(request, body);
+			response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+			return response;
+		});
+
+		try {
+			apiURI = new URI(queryString);
+			bisArrList = restTemp.exchange(
+					apiURI, HttpMethod.GET,
+					null,
+					BisArriveList.class);
+			
+			log.debug(bisArrList.toString());
+			return bisArrList.getBody().BUSSTOP_LIST;
+			
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

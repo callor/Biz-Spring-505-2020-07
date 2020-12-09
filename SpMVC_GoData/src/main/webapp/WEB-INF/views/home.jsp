@@ -16,6 +16,23 @@
 		menu_station.onclick = function(){
 			document.location.href="${rootPath}/bis/station"
 		}
+		
+		const select_cat = document.querySelector("select[name='cat']")
+		
+		// select input box의 change 이벤트를 설정하기
+		select_cat.onchange = function(e) {
+			// change 이벤트가 발생하면 value값을 추출하고
+			const value = e.target.value
+			// value값이 hosp이면 
+			if(value === 'hosp') {
+				// input box의 placeholder를 변경
+				document.querySelector("input[name='search']")
+						.placeholder = '병원명 입력후 enter...'
+			} else {
+				document.querySelector("input[name='search']")
+						.placeholder = '주소 입력후 enter...'
+			}
+		}
 	})
 </script>
 
@@ -39,7 +56,12 @@
 			</form>
 		</li>
 
-		<li><input></li>
+		<li>
+			<form action="${rootPath}/bis/station">
+				<input name="station" 
+						placeholder="정류소 입력후 Enter...">
+			</form>
+		</li>
 		<li class="get-station">노선정보가져오기</li>
 	
 	</ul>

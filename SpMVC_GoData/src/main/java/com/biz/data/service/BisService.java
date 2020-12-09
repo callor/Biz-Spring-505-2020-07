@@ -2,6 +2,7 @@ package com.biz.data.service;
 
 import java.util.List;
 
+import com.biz.data.model.BisDestVO;
 import com.biz.data.model.BisStationData;
 
 public interface BisService {
@@ -11,5 +12,7 @@ public interface BisService {
 	
 	// 문자열 형태로 수신하여 테스트 용도
 	public String getString();
+
+	public List<BisDestVO> busstop(String string);
 
 }
