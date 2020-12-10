@@ -6,6 +6,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+/**
+ * jackbind와 springFramework의 버전문제로
+ * VO클래스의 변수들을 모두 public으로 선언해야만
+ * RestTemplate에서 데이터를 제대로 변환을 한다.
+ */
 @Getter
 @Setter
 @ToString

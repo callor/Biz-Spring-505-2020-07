@@ -135,12 +135,7 @@ public class BisServiceImplV1 implements BisService{
 
 		String queryString = DataGoConfig.BIS_DEST_URL;
 		queryString += "?ServiceKey=" + DataGoConfig.SEVICE_KEY;
-		try {
-			queryString += "&BUSSTOP_ID=" + URLEncoder.encode(station,"UTF-8");
-		} catch (UnsupportedEncodingException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
+		queryString += "&BUSSTOP_ID="+ station;
 
 		RestTemplate restTemp = new RestTemplate();
 		ResponseEntity<BisArriveList> bisArrList;
@@ -159,8 +154,9 @@ public class BisServiceImplV1 implements BisService{
 					null,
 					BisArriveList.class);
 			
-			log.debug(bisArrList.getBody().RESULT.get("RESULT_CODE"));
-			log.debug(bisArrList.getBody().BUSSTOP_LIST.toString());
+			 log.debug(bisArrList.getBody()
+						.BUSSTOP_LIST
+						.toString());
 			 return bisArrList.getBody().BUSSTOP_LIST;
 			
 		} catch (URISyntaxException e) {

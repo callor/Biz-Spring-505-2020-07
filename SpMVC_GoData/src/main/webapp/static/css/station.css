@@ -1,35 +1,59 @@
 @charset "UTF-8";
-article.station {
-	width:40%;
-	border:1px solid #ddd;
-	box-shadow: 1px 1px 1px rgba(0,0,0,0.5);
-}
 
-table.station-list {
-	width: 90%;
+table.bis {
 	border-collapse: collapse;
 	border-spacing: 0;
 	border: 1px solid #ccc;
+	
+	/* 
+	table layout에서 문자열의 길이에 따라
+	테이블의 좌우 폭이 달라지는 것을 방지하기
+	*/
+	width:98%;
+	table-layout: fixed;
+	margin:2px auto;
 }
 
-table.staion-list th {
+table.bis th {
 	text-align: left;
 }
 
-table.station-list tr:nth-child(even) {
+
+
+table.bis tr:nth-child(even) {
 	background-color: #ccc;
 }
-table.station-list tr:nth-child(odd) {
+table.bis tr:nth-child(odd) {
 	background-color: #fff;
 }
 
-table.station-list tr:hover {
+table.bis tr:hover {
 	background-color: #ddd;
 	cursor: pointer;
 }
 
-table.station-list td, table.station-list th {
+table.bis td, table.bis th {
 	padding: 8px;
 	vertical-align: top;
 	white-space: nowrap; /* table의 text를 줄바꿈하지 말라 */
+	
 }
+
+table.bis td {
+	width: 20px;
+	text-align: left;
+	
+	/* 문자열이 넘칠경우 문자... 처럼 표시하게 하는 효과 */
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+table.bis td:hover {
+	
+	overflow: visible;
+	
+}
+
+
+
